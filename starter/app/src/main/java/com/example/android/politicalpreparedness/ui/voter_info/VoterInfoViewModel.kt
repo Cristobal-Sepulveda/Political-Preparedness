@@ -1,9 +1,10 @@
-package com.example.android.politicalpreparedness.election
+package com.example.android.politicalpreparedness.ui.voter_info
 
 import androidx.lifecycle.ViewModel
 import com.example.android.politicalpreparedness.database.ElectionDao
+import com.example.android.politicalpreparedness.database.ElectionDatabase
 
-class VoterInfoViewModel(private val dataSource: ElectionDao) : ViewModel() {
+class VoterInfoViewModel(dataSource: ElectionDatabase) : ViewModel() {
 
     //TODO: Add live data to hold voter info
 
