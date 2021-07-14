@@ -1,10 +1,8 @@
 package com.example.android.politicalpreparedness.ui.voter_info
 
 import android.app.Application
-import androidx.lifecycle.ViewModel
 import com.example.android.politicalpreparedness.base.BaseViewModel
 import com.example.android.politicalpreparedness.data.AppDataSource
-import com.example.android.politicalpreparedness.data.database.ElectionDatabase
 
 class VoterInfoViewModel(val app: Application, val dataSource: AppDataSource) : BaseViewModel(app){
 

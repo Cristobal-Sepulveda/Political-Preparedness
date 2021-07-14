@@ -7,11 +7,17 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.android.politicalpreparedness.base.BaseFragment
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentVoterInfoBinding
+import com.example.android.politicalpreparedness.ui.representative.RepresentativeViewModel
+import org.koin.android.ext.android.inject
 
 class VoterInfoFragment : BaseFragment() {
 
     //TODO: Add ViewModel values and create ViewModel
-    private lateinit var viewModel: VoterInfoViewModel
+    /*viewModel = ViewModelProvider(this).get(VoterInfoViewModel::class.java)*/
+    //I prefer to use KOIN to inject things. Its good practice to make great test' later
+    override val _viewModel: RepresentativeViewModel by inject()
+
+
     //TODO: Add binding values
     private lateinit var binding: FragmentVoterInfoBinding
 
@@ -19,8 +25,6 @@ class VoterInfoFragment : BaseFragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        //TODO: Add ViewModel values and create ViewModel
-        viewModel = ViewModelProvider(this).get(VoterInfoViewModel::class.java)
         //TODO: Add binding values
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_voter_info, container, false)
 

@@ -12,6 +12,8 @@ import com.example.android.politicalpreparedness.base.BaseFragment
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.data.network.models.Address
+import com.example.android.politicalpreparedness.ui.election.ElectionsViewModel
+import org.koin.android.ext.android.inject
 import java.util.Locale
 
 class DetailFragment : BaseFragment() {
@@ -20,8 +22,11 @@ class DetailFragment : BaseFragment() {
         //TODO: Add Constant for Location request
     }
 
-    //TODO: Declare ViewModel
-    private lateinit var viewModel: RepresentativeViewModel
+    //TODO: Add ViewModel values and create ViewModel
+    /*viewModel = ViewModelProvider(this).get(RepresentativeViewModel::class.java)*/
+    //I prefer to use KOIN to inject things. Its good practice to make great test' later
+    override val _viewModel: RepresentativeViewModel by inject()
+
     //TODO: Establish bindings
     private lateinit var binding: FragmentRepresentativeBinding
 
@@ -29,8 +34,6 @@ class DetailFragment : BaseFragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        //TODO: Declare ViewModel
-        viewModel = ViewModelProvider(this).get(RepresentativeViewModel::class.java)
         //TODO: Establish bindings
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_representative, container, false)
 

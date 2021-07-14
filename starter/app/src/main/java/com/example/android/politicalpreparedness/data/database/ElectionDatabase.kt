@@ -8,35 +8,19 @@ import androidx.room.TypeConverters
 import com.example.android.politicalpreparedness.data.network.models.Election
 
 @Database(entities = [Election::class], version = 1, exportSchema = false)
-@TypeConverters(Converters::class)
-abstract class ElectionDatabase: RoomDatabase() {
-
+abstract class LOCAL_DATABASE: RoomDatabase() {
     abstract val electionDao: ElectionDao
+}
 
-    companion object {
+private lateinit var INSTANCE: LOCAL_DATABASE
 
-        @Volatile
-        private var INSTANCE: ElectionDatabase? = null
-
-        fun getInstance(context: Context): ElectionDatabase {
-            synchronized(this) {
-                var instance = INSTANCE
-                if (instance == null) {
-                    instance = Room.databaseBuilder(
-                            context.applicationContext,
-                            ElectionDatabase::class.java,
-                            "election_database"
-                    )
-                            .fallbackToDestructiveMigration()
-                            .build()
-
-                    INSTANCE = instance
-                }
-
-                return instance
-            }
+fun getDatabase(context: Context): LOCAL_DATABASE {
+    synchronized(LOCAL_DATABASE::class.java) {
+        if (!::INSTANCE.isInitialized) {
+            INSTANCE = Room.databaseBuilder(context.applicationContext,
+                LOCAL_DATABASE::class.java,
+                "database").build()
         }
-
     }
-
+    return INSTANCE
 }
