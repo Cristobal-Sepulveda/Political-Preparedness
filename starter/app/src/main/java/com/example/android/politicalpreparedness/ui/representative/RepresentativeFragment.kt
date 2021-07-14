@@ -7,14 +7,14 @@ import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.android.politicalpreparedness.base.BaseFragment
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.data.network.models.Address
 import java.util.Locale
 
-class DetailFragment : Fragment() {
+class DetailFragment : BaseFragment() {
 
     companion object {
         //TODO: Add Constant for Location request

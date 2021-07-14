@@ -3,12 +3,12 @@ package com.example.android.politicalpreparedness.ui.voter_info
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.android.politicalpreparedness.base.BaseFragment
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentVoterInfoBinding
 
-class VoterInfoFragment : Fragment() {
+class VoterInfoFragment : BaseFragment() {
 
     //TODO: Add ViewModel values and create ViewModel
     private lateinit var viewModel: VoterInfoViewModel

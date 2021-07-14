@@ -2,11 +2,11 @@ package com.example.android.politicalpreparedness.ui.launch
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.android.politicalpreparedness.base.BaseFragment
 import com.example.android.politicalpreparedness.databinding.FragmentLaunchBinding
 
-class LaunchFragment : Fragment() {
+class LaunchFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,

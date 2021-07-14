@@ -57,6 +57,25 @@ dependencies {
     // Core with Ktx
     implementation "androidx.core:core-ktx:$version_core"
 
+    //Coroutines Dependencies
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_coroutines"
+
+    // Koin
+    implementation "org.koin:koin-android:$version_koin"
+    implementation "org.koin:koin-androidx-viewmodel:$version_koin"
+    implementation "org.koin:koin-androidx-scope:$version_koin"
+    androidTestImplementation('org.koin:koin-test:2.0.1') { exclude group: 'org.mockito' }
+
+    //Navigation dependencies
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:$version_archLifecycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_archLifecycle"
+    implementation "androidx.lifecycle:lifecycle-extensions:$version_archLifecycle"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$version_archLifecycle"
+    implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
+
+
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit: $version_retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"

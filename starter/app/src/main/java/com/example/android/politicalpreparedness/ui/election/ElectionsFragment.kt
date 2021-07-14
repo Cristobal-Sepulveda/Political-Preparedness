@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.android.politicalpreparedness.base.BaseFragment
 import com.example.android.politicalpreparedness.R
+import com.example.android.politicalpreparedness.base.BaseViewModel
 import com.example.android.politicalpreparedness.databinding.FragmentElectionBinding
 
-class ElectionsFragment: Fragment() {
+class ElectionsFragment: BaseFragment() {
 
     //TODO: Declare ViewModel
     private lateinit var viewModel: ElectionsViewModel
