@@ -1,8 +1,7 @@
 package com.example.android.politicalpreparedness.ui.voter_info
 
 import androidx.lifecycle.ViewModel
-import com.example.android.politicalpreparedness.database.ElectionDao
-import com.example.android.politicalpreparedness.database.ElectionDatabase
+import com.example.android.politicalpreparedness.data.database.ElectionDatabase
 
 class VoterInfoViewModel(dataSource: ElectionDatabase) : ViewModel() {
 

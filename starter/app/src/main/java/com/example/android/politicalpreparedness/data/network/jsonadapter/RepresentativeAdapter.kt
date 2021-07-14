@@ -1,10 +1,10 @@
-package com.example.android.politicalpreparedness.network.jsonadapter
+package com.example.android.politicalpreparedness.data.network.jsonadapter
 
-import com.example.android.politicalpreparedness.network.models.Division
+import com.example.android.politicalpreparedness.data.network.models.Division
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson
 
-class ElectionAdapter {
+class RepresentativeAdapter {
     @FromJson
     fun divisionFromJson (ocdDivisionId: String): Division {
         val countryDelimiter = "country:"

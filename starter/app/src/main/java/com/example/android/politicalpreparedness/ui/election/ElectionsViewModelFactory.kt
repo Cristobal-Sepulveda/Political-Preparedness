@@ -2,7 +2,7 @@ package com.example.android.politicalpreparedness.ui.election
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.android.politicalpreparedness.database.ElectionDatabase
+import com.example.android.politicalpreparedness.data.database.ElectionDatabase
 
 /**
  * This is pretty much boiler plate code for a ViewModel Factory.
