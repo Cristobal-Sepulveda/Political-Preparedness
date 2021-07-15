@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
-@Entity
+/*@Entity
 data class REPRESENTATIVE_DBO(
     val name: String,
     val party: String,
@@ -14,8 +14,8 @@ data class REPRESENTATIVE_DBO(
     val website: String,
     val facebook: String,
     val twitter: String,
-    @PrimaryKey val id: String/* = UUID.randomUUID().toString()*/
-)
+    @PrimaryKey val id: String*//* = UUID.randomUUID().toString()*//*
+)*/
 
 
 
