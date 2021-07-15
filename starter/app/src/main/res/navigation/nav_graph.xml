@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_launchFragment_to_electionsFragment"
             app:destination="@id/electionsFragment" />
+        <action
+            android:id="@+id/action_launchFragment_to_voterInfoFragment"
+            app:destination="@id/voterInfoFragment" />
     </fragment>
 
     <fragment
@@ -36,7 +39,7 @@
             app:argType="integer" />
         <argument
             android:name="arg_division"
-            app:argType="com.example.android.politicalpreparedness.network.models.Division" />
+            app:argType="com.example.android.politicalpreparedness.data.network.models.Division" />
     </fragment>
     <fragment
         android:id="@+id/electionsFragment"

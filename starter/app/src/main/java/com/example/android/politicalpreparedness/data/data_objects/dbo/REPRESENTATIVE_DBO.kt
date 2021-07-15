@@ -1,9 +1,10 @@
 package com.example.android.politicalpreparedness.data.data_objects.dbo
 
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
-
+@Entity
 data class REPRESENTATIVE_DBO(
     val name: String,
     val party: String,

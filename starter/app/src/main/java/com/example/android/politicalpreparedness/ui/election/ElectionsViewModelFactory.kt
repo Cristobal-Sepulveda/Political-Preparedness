@@ -1,7 +1,9 @@
 package com.example.android.politicalpreparedness.ui.election
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.android.politicalpreparedness.data.AppDataSource
 import com.example.android.politicalpreparedness.data.database.ElectionDatabase
 
 /**
@@ -10,12 +12,13 @@ import com.example.android.politicalpreparedness.data.database.ElectionDatabase
  * Provides the key for the night and the SleepDatabaseDao to the ViewModel.
  */
 //TODO: Create Factory to generate ElectionViewModel with provided election datasource
-class ElectionsViewModelFactory (
-    val dataSource: ElectionDatabase): ViewModelProvider.Factory {
+class ElectionsViewModelFactory (val app: Application,
+                                 val dataSource: AppDataSource
+): ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ElectionsViewModel::class.java)) {
-            return ElectionsViewModel(dataSource) as T
+            return ElectionsViewModel(app, dataSource) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

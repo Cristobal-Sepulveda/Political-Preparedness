@@ -7,12 +7,10 @@ import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import com.example.android.politicalpreparedness.base.BaseFragment
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
-import com.example.android.politicalpreparedness.data.network.models.Address
-import com.example.android.politicalpreparedness.ui.election.ElectionsViewModel
+import com.example.android.politicalpreparedness.data.data_objects.dto.Address
 import org.koin.android.ext.android.inject
 import java.util.Locale
 
@@ -36,7 +34,7 @@ class DetailFragment : BaseFragment() {
 
         //TODO: Establish bindings
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_representative, container, false)
-
+        binding.lifecycleOwner = this
         //TODO: Define and assign Representative adapter
 
         //TODO: Populate Representative adapter

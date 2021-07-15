@@ -30,5 +30,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/representative_button"
             app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <!-- TODO: Recuerda Borrar -->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/voter_info_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/representative_button"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

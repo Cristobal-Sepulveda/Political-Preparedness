@@ -4,21 +4,20 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import com.example.android.politicalpreparedness.data.network.models.Election
+import com.example.android.politicalpreparedness.data.data_objects.dto.Election
 
 @Database(entities = [Election::class], version = 1, exportSchema = false)
-abstract class LOCAL_DATABASE: RoomDatabase() {
+abstract class ElectionDatabase: RoomDatabase() {
     abstract val electionDao: ElectionDao
 }
 
-private lateinit var INSTANCE: LOCAL_DATABASE
+private lateinit var INSTANCE: ElectionDatabase
 
-fun getDatabase(context: Context): LOCAL_DATABASE {
-    synchronized(LOCAL_DATABASE::class.java) {
+fun getDatabase(context: Context): ElectionDatabase {
+    synchronized(ElectionDatabase::class.java) {
         if (!::INSTANCE.isInitialized) {
             INSTANCE = Room.databaseBuilder(context.applicationContext,
-                LOCAL_DATABASE::class.java,
+                ElectionDatabase::class.java,
                 "database").build()
         }
     }

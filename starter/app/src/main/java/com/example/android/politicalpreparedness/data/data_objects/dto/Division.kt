@@ -1,4 +1,4 @@
-package com.example.android.politicalpreparedness.data.network.models
+package com.example.android.politicalpreparedness.data.data_objects.dto
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -9,3 +9,4 @@ data class Division(
         val country: String,
         val state: String
 ) : Parcelable
+
