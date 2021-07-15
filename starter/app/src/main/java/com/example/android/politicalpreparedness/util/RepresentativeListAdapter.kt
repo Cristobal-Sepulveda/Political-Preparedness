@@ -12,14 +12,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.data.data_objects.domain_object.Representative
-import com.example.android.politicalpreparedness.databinding.ViewHolderRepresentativeBinding
+import com.example.android.politicalpreparedness.databinding.ViewHolderItemRepresentativeBinding
 
 class RepresentativeListAdapter : ListAdapter<Representative,
         RepresentativeViewHolder>(RepresentativeDiffCallback())
 {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepresentativeViewHolder {
-            return RepresentativeViewHolder(ViewHolderRepresentativeBinding.inflate(LayoutInflater.from(parent.context)))
+            return RepresentativeViewHolder(ViewHolderItemRepresentativeBinding.inflate(LayoutInflater.from(parent.context)))
         }
 
         override fun onBindViewHolder(holder: RepresentativeViewHolder, position: Int) {
@@ -28,7 +28,7 @@ class RepresentativeListAdapter : ListAdapter<Representative,
         }
 }
 
-class RepresentativeViewHolder(val binding: ViewHolderRepresentativeBinding)
+class RepresentativeViewHolder(val binding: ViewHolderItemRepresentativeBinding)
     : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Representative) {
