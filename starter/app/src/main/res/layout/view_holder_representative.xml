@@ -22,7 +22,7 @@
         <!--android:onClick="@{() -> clickListener.onClick(sleep)}"-->
 
         <ImageView
-            android:id="@+id/quality_image"
+            android:id="@+id/representativePhoto_imageView"
             android:layout_width="@dimen/icon_size"
             android:layout_height="@dimen/icon_size"
             android:layout_marginStart="16dp"
@@ -33,13 +33,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/quality_string"
+            android:id="@+id/representativeName_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/quality_image"
-            app:layout_constraintStart_toStartOf="@+id/quality_image"
-            app:layout_constraintTop_toBottomOf="@+id/quality_image"/>
+            app:layout_constraintEnd_toEndOf="@+id/representativePhoto_imageView"
+            app:layout_constraintStart_toStartOf="@+id/representativePhoto_imageView"
+            app:layout_constraintTop_toBottomOf="@+id/representativePhoto_imageView"/>
             <!--app:sleepQualityString="@{sleep}"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
