@@ -1,12 +1,7 @@
 package com.example.android.politicalpreparedness.util
 
-import android.content.Intent
-import android.content.Intent.ACTION_VIEW
-import android.net.Uri
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,22 +9,12 @@ import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.data.data_objects.domain_object.Representative
 import com.example.android.politicalpreparedness.databinding.ViewHolderItemRepresentativeBinding
 
-class RepresentativeListAdapter : ListAdapter<Representative,
-        RepresentativeViewHolder>(RepresentativeDiffCallback())
-{
+class RepresentativeListAdapter(
+    private val representativeOnClickListener: RepresentativeOnClickListener)
+    : ListAdapter<Representative, RepresentativeListAdapter.RepresentativeViewHolder>(RepresentativeDiffCallback) {
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepresentativeViewHolder {
-            return RepresentativeViewHolder(ViewHolderItemRepresentativeBinding.inflate(LayoutInflater.from(parent.context)))
-        }
-
-        override fun onBindViewHolder(holder: RepresentativeViewHolder, position: Int) {
-            val item = getItem(position)
-            holder.bind(item)
-        }
-}
-
-class RepresentativeViewHolder(val binding: ViewHolderItemRepresentativeBinding)
-    : RecyclerView.ViewHolder(binding.root) {
+    class RepresentativeViewHolder(val binding: ViewHolderItemRepresentativeBinding)
+        : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Representative) {
             binding.representativeNameTextView.text = item.official.name
@@ -78,25 +63,46 @@ class RepresentativeViewHolder(val binding: ViewHolderItemRepresentativeBinding)
 
     }
 
-/**
- * Callback for calculating the diff between two non-null items in a list.
- *
- * Used by ListAdapter to calculate the minumum number of changes between and old list and a new
- * list that's been passed to `submitList`.
- */
-//TODO: Create RepresentativeDiffCallback
-class RepresentativeDiffCallback : DiffUtil.ItemCallback<Representative>() {
-    override fun areItemsTheSame(oldItem: Representative, newItem: Representative): Boolean {
-        return oldItem.official == newItem.official
+    /**
+     * Callback for calculating the diff between two non-null items in a list.
+     *
+     * Used by ListAdapter to calculate the minumum number of changes between and old list and a new
+     * list that's been passed to `submitList`.
+     */
+    //TODO: Create RepresentativeDiffCallback
+    companion object RepresentativeDiffCallback : DiffUtil.ItemCallback<Representative>() {
+        override fun areItemsTheSame(oldItem: Representative, newItem: Representative): Boolean {
+            return oldItem.official == newItem.official
+        }
+
+        override fun areContentsTheSame(oldItem: Representative, newItem: Representative): Boolean {
+            return oldItem == newItem
+        }
     }
 
-    override fun areContentsTheSame(oldItem: Representative, newItem: Representative): Boolean {
-        return oldItem == newItem
+    override fun onBindViewHolder(holder: RepresentativeViewHolder, position: Int) {
+        val representative = getItem(position)
+
+        holder.itemView.setOnClickListener {
+            representativeOnClickListener.onClick(representative)
+        }
+
+        holder.bind(representative)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepresentativeViewHolder {
+        return RepresentativeViewHolder(ViewHolderItemRepresentativeBinding.inflate(LayoutInflater.from(parent.context)))
+    }
+
+    //TODO: Create RepresentativeListener
+    class RepresentativeOnClickListener(val clickListener: (representative: Representative) -> Unit) {
+        fun onClick(representative: Representative) = clickListener(representative)
     }
 }
 
-//TODO: Create RepresentativeListener
-/*
-class representativeItemListener(val clickListener: (sleepId: Long) -> Unit) {
-fun onClick(night: SleepNight) = clickListener(night.nightId)
-}*/
+
+
+
+
+
+

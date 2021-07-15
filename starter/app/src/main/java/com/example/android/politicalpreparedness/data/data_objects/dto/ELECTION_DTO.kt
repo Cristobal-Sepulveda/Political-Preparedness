@@ -15,7 +15,7 @@ data class ELECTION_DTO(
 fun ELECTION_DTO.asDataBaseModel(electionDto: ELECTION_DTO): ELECTION_DBO {
         return ELECTION_DBO(
                 name = electionDto.name,
-                electionDay = electionDto.electionDay,
+                electionDay = electionDto.electionDay.toString(),
                 division = electionDto.division,
                 id = electionDto.id
         )

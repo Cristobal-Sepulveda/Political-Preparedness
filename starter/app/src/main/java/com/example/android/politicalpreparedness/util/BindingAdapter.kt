@@ -11,12 +11,12 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.android.politicalpreparedness.R
-import com.example.android.politicalpreparedness.data.data_objects.dto.Election
+import com.example.android.politicalpreparedness.data.data_objects.domain_object.ELECTION_DOMAIN_OBJECT
 import com.example.android.politicalpreparedness.data.data_objects.domain_object.Representative
 
 
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Election>?) {
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<ELECTION_DOMAIN_OBJECT>?) {
 
     val adapter = recyclerView.adapter as ElectionListAdapter
     adapter.submitList(data)

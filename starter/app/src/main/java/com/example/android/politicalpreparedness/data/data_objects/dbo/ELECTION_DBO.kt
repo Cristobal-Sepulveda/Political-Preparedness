@@ -12,7 +12,7 @@ import java.util.*
 @Entity
 data class ELECTION_DBO(
     @ColumnInfo(name = "name")val name: String,
-    @ColumnInfo(name = "electionDay")val electionDay: Date,
+    @ColumnInfo(name = "electionDay")val electionDay: String,
     @Embedded(prefix = "division_") @Json(name="ocdDivisionId") val division: Division,
     @PrimaryKey val id: Int
 )
