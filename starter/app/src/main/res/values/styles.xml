@@ -10,5 +10,10 @@
     </style>
 
     <!-- TODO: Add necessary styles -->
-
+    <style name ="defaultStyle_button">
+        <item name ="android:textColor">@color/white</item>
+        <item name ="android:background">@color/colorPrimary</item>
+        <item name ="android:layout_marginStart">@dimen/space_big</item>
+        <item name ="android:layout_marginEnd">@dimen/space_big</item>
+    </style>
 </resources>

@@ -2,7 +2,8 @@
 <resources>
     <string name="app_name">Political Preparedness</string>
     <string name="header_text">ITEM</string>
-
     <!-- TODO: Add necessary string values -->
-
+    <string name="fragment_launch_image_description">Logo of the app</string>
+    <string name="upcoming_elections">upcoming elections</string>
+    <string name="find_my_representatives">find my representatives</string>
 </resources>

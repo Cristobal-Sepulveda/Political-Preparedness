@@ -7,7 +7,7 @@ class AppRepository(private val electionDao: ElectionDao,
                     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO): AppDataSource {
 
     override suspend fun getingDataFromApi() {
-        TODO("Not yet implemented")
+        println("hola")
     }
 
 }

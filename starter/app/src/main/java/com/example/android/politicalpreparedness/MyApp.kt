@@ -16,8 +16,6 @@ import org.koin.core.context.startKoin
 
 class MyApp : Application() {
 
-    private val applicationScope = CoroutineScope(Dispatchers.Default)
-
     override fun onCreate() {
         super.onCreate()
 
