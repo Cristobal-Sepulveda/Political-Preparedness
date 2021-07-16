@@ -10,38 +10,36 @@
         <!-- TODO: Add image for home screen logo. -->
         <ImageView
             android:id="@+id/ballot_imageView"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/fragment_launch_image_description"
             android:src="@drawable/ballot_logo"
-            android:contentDescription="@string/fragment_launch_image_description" />
+            app:layout_constraintBottom_toTopOf="@+id/upcomingElections_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- TODO: Add Button to navigate to upcoming elections. -->
         <Button
+            android:id="@+id/upcomingElections_button"
+            style="@style/defaultStyle_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/upcomingElections_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ballot_imageView"
-            app:layout_constraintBottom_toTopOf="@id/findRepresentatives_button"
             android:text="@string/upcoming_elections"
-            style="@style/defaultStyle_button"/>
+            app:layout_constraintBottom_toTopOf="@id/findRepresentatives_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <!-- TODO: Add Button to navigate to representatives. -->
         <Button
+            android:id="@+id/findRepresentatives_button"
+            style="@style/defaultStyle_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/findRepresentatives_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/upcomingElections_button"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:text="@string/find_my_representatives"
-            style="@style/defaultStyle_button"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

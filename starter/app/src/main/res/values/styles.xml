@@ -15,5 +15,6 @@
         <item name ="android:background">@color/colorPrimary</item>
         <item name ="android:layout_marginStart">@dimen/space_big</item>
         <item name ="android:layout_marginEnd">@dimen/space_big</item>
+        <item name ="android:layout_marginBottom">@dimen/space_big</item>
     </style>
 </resources>
