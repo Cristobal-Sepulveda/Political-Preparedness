@@ -4,6 +4,6 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class ElectionResponse(
-        val kind: String,
-        val elections: List<ELECTION_DTO>
+        val elections: List<ELECTION_DTO>,
+        val kind: String
 )

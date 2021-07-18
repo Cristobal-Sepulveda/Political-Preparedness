@@ -45,6 +45,7 @@ fun bindOnTextClickListener(textView: TextView, url: String?) {
     }
 }
 
+/*
 @BindingAdapter("app:loadImage")
 fun loadImage(view: ImageView, url: String?) {
     val uri = (url ?: "").toUri().buildUpon().scheme("https").build()
@@ -54,4 +55,4 @@ fun loadImage(view: ImageView, url: String?) {
         .error(R.drawable.ic_profile)
         .circleCrop()
         .into(view)
-}
+}*/

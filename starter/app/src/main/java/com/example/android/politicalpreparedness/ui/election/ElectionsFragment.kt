@@ -31,7 +31,6 @@ class ElectionsFragment: BaseFragment() {
             R.layout.fragment_election,
             container,
             false)
-
         binding.lifecycleOwner = this
 
         //TODO: Link elections to voter info

@@ -2,5 +2,5 @@ package com.example.android.politicalpreparedness.data
 
 interface AppDataSource {
 
-    suspend fun getingDataFromApi()
+    suspend fun getNextElectionsFromAPIService()
 }

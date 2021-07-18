@@ -5,24 +5,23 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.android.politicalpreparedness.data.data_objects.domain_object.ELECTION_DOMAIN_OBJECT
-import com.example.android.politicalpreparedness.data.data_objects.dto.Division
 import com.squareup.moshi.Json
-import java.util.*
 
 @Entity
 data class ELECTION_DBO(
-    @ColumnInfo(name = "name")val name: String,
-    @ColumnInfo(name = "electionDay")val electionDay: String,
-    @Embedded(prefix = "division_") @Json(name="ocdDivisionId") val division: Division,
+    val name: String,
+    val electionDay: String,
+    val division: String,
     @PrimaryKey val id: Int
 )
 
 fun List<ELECTION_DBO>.asDomainModel(): List<ELECTION_DOMAIN_OBJECT> {
     return map {
         ELECTION_DOMAIN_OBJECT (
-        name = it.name,
+            name = it.name,
             electionDay = it.electionDay,
             division = it.division,
-            id = it.id)
+            id = it.id
+        )
     }
 }

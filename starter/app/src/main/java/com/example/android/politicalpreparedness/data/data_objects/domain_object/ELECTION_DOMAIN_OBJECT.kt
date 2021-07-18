@@ -9,6 +9,6 @@ import java.util.*
 data class ELECTION_DOMAIN_OBJECT(
     val name: String,
     val electionDay: String,
-    val division: Division,
+    val division: String,
     val id: Int
 ): Parcelable
