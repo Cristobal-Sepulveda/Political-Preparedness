@@ -36,7 +36,7 @@ interface CivicApiService {
     @GET("elections")
     suspend fun getElections(
         @Query("key") apiKey: String
-    ): Call<ElectionResponse>
+    ): ElectionResponse
 
     //TODO: Add voterinfo API Call
     @GET("voterinfo")

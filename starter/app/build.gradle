@@ -35,8 +35,16 @@ android {
     }
 }
 
+/*************************************************************************************************/
+/***********************************    DEPENDENCIES     ***************************************/
+/*************************************************************************************************/
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    /*****************************************************************************************/
+    /***********************************  Language     ***************************************/
+    /*****************************************************************************************/
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version_kotlin"
@@ -44,31 +52,52 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_kotlin_coroutines"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$version_kotlin_serialization"
 
+    /*****************************************************************************************/
+    /********************  Other dependencies sorted alphabetically     ********************/
+    /*****************************************************************************************/
+
+
+    /** C */
     // Constraint Layout
     implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
-
     //Circle Profile Picture View
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-
-    // ViewModel and LiveData
-    implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
-
-    // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
-    implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
-
     // Core with Ktx
     implementation "androidx.core:core-ktx:$version_core"
-
     //Coroutines Dependencies
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_coroutines"
 
+
+    /** G */
+    // Glide
+    //TODO: Add Glide Implementation
+    implementation "com.github.bumptech.glide:glide:$version_glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$version_glide"
+    annotationProcessor "com.github.bumptech.glide:compiler:$version_glide"
+
+
+    /** K */
     // Koin
     implementation "org.koin:koin-android:$version_koin"
     implementation "org.koin:koin-androidx-viewmodel:$version_koin"
     implementation "org.koin:koin-androidx-scope:$version_koin"
     androidTestImplementation('org.koin:koin-test:2.0.1') { exclude group: 'org.mockito' }
 
+
+    /** L */
+    // Location
+    implementation "com.google.android.gms:play-services-location:$version_play_services_location"
+
+
+    /** M */
+    // Moshi
+    implementation "com.squareup.moshi:moshi:$version_moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
+    implementation "com.squareup.moshi:moshi-adapters:$version_moshi"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$version_moshi"
+
+
+    /** N */
     //Navigation dependencies
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation "androidx.lifecycle:lifecycle-extensions:$version_archLifecycle"
@@ -76,25 +105,14 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$version_lifecycle_extensions"
     implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
+    implementation "androidx.test.espresso:espresso-idling-resource:$version_espresso"
 
 
+    /** R */
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit: $version_retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$version_retrofit_coroutines_adapter"
-
-    // Moshi
-    implementation "com.squareup.moshi:moshi:$version_moshi"
-    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
-    implementation "com.squareup.moshi:moshi-adapters:$version_moshi"
-    kapt "com.squareup.moshi:moshi-kotlin-codegen:$version_moshi"
-
-    // Glide
-    //TODO: Add Glide Implementation
-    implementation "com.github.bumptech.glide:glide:$version_glide"
-    annotationProcessor "com.github.bumptech.glide:compiler:$version_glide"
-    annotationProcessor "com.github.bumptech.glide:compiler:$version_glide"
-
     //Room
     implementation "androidx.room:room-runtime:$version_room"
     implementation "androidx.room:room-ktx:$version_room"
@@ -102,6 +120,49 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.room:room-compiler:$version_room"
 
-    // Location
-    implementation "com.google.android.gms:play-services-location:$version_play_services_location"
+
+    /** V */
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
+
+
+    /*********************************************************************************************/
+    /*********************************      TESTING       ****************************************/
+    /*********************************************************************************************/
+
+    // Dependencies for local unit tests
+    testImplementation "junit:junit:$version_junit"
+    testImplementation "org.hamcrest:hamcrest-all:$version_hamcrest"
+    testImplementation "androidx.arch.core:core-testing:$version_arch_testing"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_coroutines"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version_coroutines"
+    testImplementation "org.robolectric:robolectric:$version_roboelectric"
+    testImplementation "com.google.truth:truth:$version_truth"
+    testImplementation "org.mockito:mockito-core:$version_mockito"
+
+    // AndroidX Test - JVM testing
+    testImplementation "androidx.test:core-ktx:$version_androidX_test_core"
+    testImplementation "androidx.test.ext:junit-ktx:$version_androidX_test_ext_kotlin_runner"
+    testImplementation "androidx.test:rules:$version_androidX_test_rules"
+
+    // AndroidX Test - Instrumented testing
+    androidTestImplementation "androidx.test.ext:junit-ktx:$version_androidX_test_ext_kotlin_runner"
+    androidTestImplementation "androidx.test:core-ktx:$version_androidX_test_core"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version_coroutines"
+    androidTestImplementation "androidx.test:rules:$version_androidX_test_rules"
+    androidTestImplementation "androidx.room:room-testing:$version_room"
+    androidTestImplementation "androidx.arch.core:core-testing:$version_arch_testing"
+    androidTestImplementation "org.robolectric:annotations:$version_roboelectric"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$version_espresso"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$version_espresso"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$version_espresso"
+    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$version_espresso"
+    androidTestImplementation "junit:junit:$version_junit"
+    // Once https://issuetracker.google.com/127986458 is fixed this can be testImplementation
+    debugImplementation "androidx.fragment:fragment-testing:$version_fragment"
+    implementation "androidx.test:core:$version_androidX_test_core"
+    implementation "androidx.fragment:fragment-ktx:$version_fragment"
+    androidTestImplementation "org.mockito:mockito-core:$version_mockito"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$version_dexMaker"
+    androidTestImplementation('org.koin:koin-test:2.0.1') { exclude group: 'org.mockito' }
 }

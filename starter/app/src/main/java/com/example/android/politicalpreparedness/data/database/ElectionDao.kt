@@ -1,5 +1,6 @@
 package com.example.android.politicalpreparedness.data.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -15,7 +16,7 @@ interface ElectionDao {
 
     //TODO: Add select all election query
     @Query("SELECT * FROM ELECTION_DBO")
-    suspend fun getAllElections(): List<ELECTION_DBO>
+    suspend fun getAllElections(): LiveData<List<ELECTION_DBO>>
 
     //TODO: Add select single election query
     @Query("SELECT * FROM ELECTION_DBO where id = :id")
