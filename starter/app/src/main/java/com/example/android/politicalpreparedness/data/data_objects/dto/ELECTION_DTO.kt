@@ -6,6 +6,9 @@ import com.squareup.moshi.JsonClass
 import java.util.*
 
 @JsonClass(generateAdapter = true)
+data class ELECTION_DTO_Container(var asteroids: ArrayList<ELECTION_DTO>)
+
+@JsonClass(generateAdapter = true)
 data class ELECTION_DTO(
         val id: Int,
         val name: String,

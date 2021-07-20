@@ -1,10 +1,13 @@
 package com.example.android.politicalpreparedness.ui.election
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.politicalpreparedness.base.BaseFragment
 import com.example.android.politicalpreparedness.R
@@ -32,6 +35,19 @@ class ElectionsFragment: BaseFragment() {
             container,
             false)
         binding.lifecycleOwner = this
+
+        _viewModel.reloadFragment.observe(viewLifecycleOwner, Observer{
+            if(it){
+                _viewModel.reloadFragmentDone()
+                val ft: FragmentTransaction = requireFragmentManager().beginTransaction()
+                if (Build.VERSION.SDK_INT >= 26) {
+                    ft.setReorderingAllowed(false)
+                }
+                ft.detach(this).attach(this).commit()
+            }
+        })
+
+
 
         //TODO: Link elections to voter info
 
