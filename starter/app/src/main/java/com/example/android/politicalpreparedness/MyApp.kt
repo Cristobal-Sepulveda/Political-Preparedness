@@ -28,7 +28,7 @@ class MyApp : Application() {
             single {
                 ElectionsViewModel(
                     get(),
-                    get() as AppDataSource
+                    get() as AppRepository
                 )
             }
 
@@ -52,6 +52,8 @@ class MyApp : Application() {
 
             //REPOSITORY
             single{ AppRepository(get()) as AppDataSource }
+            //REPOSITORY
+            single{ AppRepository(get())}
         }
 
         startKoin {

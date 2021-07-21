@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.android.politicalpreparedness.base.BaseFragment
 import com.example.android.politicalpreparedness.R
-import com.example.android.politicalpreparedness.base.BaseViewModel
 import com.example.android.politicalpreparedness.databinding.FragmentElectionBinding
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class ElectionsFragment: BaseFragment() {
@@ -47,6 +48,12 @@ class ElectionsFragment: BaseFragment() {
             }
         })
 
+        binding.dbButton.setOnClickListener{
+            GlobalScope.launch {
+                val aux = _viewModel.gettingElectionsFromDB()
+                println(aux)
+            }
+        }
 
 
         //TODO: Link elections to voter info

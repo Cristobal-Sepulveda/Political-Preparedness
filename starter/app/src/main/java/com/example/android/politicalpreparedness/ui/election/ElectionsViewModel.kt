@@ -1,59 +1,51 @@
 package com.example.android.politicalpreparedness.ui.election
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.android.politicalpreparedness.base.BaseViewModel
 import com.example.android.politicalpreparedness.data.AppDataSource
 import com.example.android.politicalpreparedness.data.AppRepository
+import com.example.android.politicalpreparedness.data.data_objects.dbo.ELECTION_DBO
 import com.example.android.politicalpreparedness.data.data_objects.dbo.asDomainModel
 import com.example.android.politicalpreparedness.data.data_objects.domain_object.ELECTION_DOMAIN_OBJECT
 import com.example.android.politicalpreparedness.data.database.ElectionDatabase
+import com.example.android.politicalpreparedness.data.database.getDatabase
 import kotlinx.coroutines.launch
 
 //TODO: Construct ViewModel and provide election datasource
-class ElectionsViewModel(val app: Application, val dataSource: AppDataSource) : BaseViewModel(app) {
+class ElectionsViewModel(val app: Application, val dataSource: AppRepository) : BaseViewModel(app) {
 
     /******************************     AUX S        ***********************************/
+    private val database = getDatabase(app)
     private val _reloadFragment = MutableLiveData<Boolean>()
     val reloadFragment : LiveData<Boolean>
         get() = _reloadFragment
 
-
     /**********************************************************************************/
-
-    //TODO: Create live data val for upcoming elections
-    /**
-     * This fix the app freezing issue and toggle between Asteroid list
-     * smoothly, MutableLiveData give freeze problems.
-     */
-    val electionListToDisplayInTheScreen:
-            MediatorLiveData<List<ELECTION_DOMAIN_OBJECT>> = MediatorLiveData()
-    private val _listToBindingAdapter = MutableLiveData<Boolean>()
-    val listToBindingAdapter : LiveData<Boolean>
-        get() = _listToBindingAdapter
-
-    private val _list = MutableLiveData<List<ELECTION_DOMAIN_OBJECT>>()
-    val list : LiveData<List<ELECTION_DOMAIN_OBJECT>>
-        get() = _list
-
-
 
     init{
         viewModelScope.launch{
-            dataSource.getNextElectionsFromAPIService()
-            val asteroidList = ArrayList<NetworkAsteroid>()
-            val listFromDatabaseValueConverted = dataSource
-                .getElectionsFromDatabase()
 
-            electionListToDisplayInTheScreen.addSource(_list){
-                electionListToDisplayInTheScreen.value = it
+            if(dataSource.gettingAndSavingInDB_NextElectionsFromAPIService()) {
+                val electionsInDatabase = dataSource.getElectionsFromDatabase()
+                Log.i("INSERT", "$electionsInDatabase")
+                Log.i("INSERT", "ASDASDASDASDASDASD")
+            }else{
+                _reloadFragment.value = true
             }
         }
     }
-
     fun reloadFragmentDone() {
         _reloadFragment.value = false
     }
+
+    suspend fun gettingElectionsFromDB(): List<ELECTION_DOMAIN_OBJECT>{
+        return dataSource.getElectionsFromDatabase()
+    }
+
+
+
 }
 
 

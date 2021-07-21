@@ -18,7 +18,7 @@ class ElectionListAdapter(private val onClickListener: OnClickListener)
 
         fun bind(item: ELECTION_DOMAIN_OBJECT) {
             binding.electionNameTextView.text = item.name
-            binding.electionDateTextView.text = item.electionDay.toString()
+            binding.electionDateTextView.text = item.electionDay
 
             //TODO: Show social links ** Hint: Use provided helper methods
             //TODO: Show www link ** Hint: Use provided helper methods

@@ -21,8 +21,8 @@ private const val BASE_URL = "https://www.googleapis.com/civicinfo/v2/"
 // TODO: Add adapters for Java Date and custom adapter ElectionAdapter (included in project)
 private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
-/*        .add(ElectionAdapter())
-        .add(RepresentativeAdapter())*/
+        .add(ElectionAdapter())
+        .add(RepresentativeAdapter())
         .add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
         .build()
 

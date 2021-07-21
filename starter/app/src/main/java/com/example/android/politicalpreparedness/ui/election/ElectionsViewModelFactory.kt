@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.politicalpreparedness.data.AppDataSource
+import com.example.android.politicalpreparedness.data.AppRepository
 import com.example.android.politicalpreparedness.data.database.ElectionDatabase
 
 /**
@@ -13,7 +14,7 @@ import com.example.android.politicalpreparedness.data.database.ElectionDatabase
  */
 //TODO: Create Factory to generate ElectionViewModel with provided election datasource
 class ElectionsViewModelFactory (val app: Application,
-                                 val dataSource: AppDataSource
+                                 val dataSource: AppRepository
 ): ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

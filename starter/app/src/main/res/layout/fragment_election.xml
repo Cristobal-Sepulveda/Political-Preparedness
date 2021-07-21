@@ -27,7 +27,7 @@
             android:layout_margin="@dimen/space_small"/>
 
         <!-- TODO: Add Upcoming Election Recycler and Header -->
-<!--        <androidx.recyclerview.widget.RecyclerView
+        <!--<androidx.recyclerview.widget.RecyclerView
             android:id="@+id/election_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -35,11 +35,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/upcomingElectionsTitle_textView"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:listData="@{viewModel.electionListToDisplayInTheScreen}">
-
+            app:listData="@{viewModel.electionsInDatabase}">
         </androidx.recyclerview.widget.RecyclerView>-->
 
         <!-- TODO: Add Saved Election Recycler and Header -->
+        <Button
+            android:id="@+id/db_button"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

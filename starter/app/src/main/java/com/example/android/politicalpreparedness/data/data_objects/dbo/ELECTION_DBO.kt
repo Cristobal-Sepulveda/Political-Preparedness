@@ -1,11 +1,9 @@
 package com.example.android.politicalpreparedness.data.data_objects.dbo
 
-import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.android.politicalpreparedness.data.data_objects.domain_object.ELECTION_DOMAIN_OBJECT
-import com.squareup.moshi.Json
 
 @Entity
 data class ELECTION_DBO(

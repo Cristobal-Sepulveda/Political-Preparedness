@@ -17,7 +17,6 @@ import com.example.android.politicalpreparedness.data.data_objects.domain_object
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<ELECTION_DOMAIN_OBJECT>?) {
-
     val adapter = recyclerView.adapter as ElectionListAdapter
     adapter.submitList(data)
 

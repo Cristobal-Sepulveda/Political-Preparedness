@@ -1,6 +1,5 @@
 package com.example.android.politicalpreparedness.util
 
-import com.example.android.politicalpreparedness.data.data_objects.dbo.ELECTION_DBO
 import com.example.android.politicalpreparedness.data.data_objects.dto.ELECTION_DTO
 import com.example.android.politicalpreparedness.data.data_objects.dto.ELECTION_DTO_Container
 import org.json.JSONObject

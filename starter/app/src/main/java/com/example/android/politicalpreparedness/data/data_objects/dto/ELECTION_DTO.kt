@@ -16,11 +16,13 @@ data class ELECTION_DTO(
         @Json(name = "ocdDivisionId")val division: String
 )
 
-fun ELECTION_DTO.asDataBaseModel(electionDto: ELECTION_DTO): ELECTION_DBO {
-        return ELECTION_DBO(
-                id = electionDto.id,
-                name = electionDto.name,
-                electionDay = electionDto.electionDay.toString(),
-                division = electionDto.division
-        )
+fun List<ELECTION_DTO>.asDataBaseModel(): Array<ELECTION_DBO> {
+        return this.map {
+                ELECTION_DBO(
+                        id = it.id,
+                        name = it.name,
+                        electionDay = it.electionDay.toString(),
+                        division = it.division
+                )
+        }.toTypedArray()
 }
