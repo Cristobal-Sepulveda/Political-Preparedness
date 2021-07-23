@@ -18,9 +18,6 @@
         <action
             android:id="@+id/action_launchFragment_to_electionsFragment"
             app:destination="@id/electionsFragment" />
-        <action
-            android:id="@+id/action_launchFragment_to_voterInfoFragment"
-            app:destination="@id/voterInfoFragment" />
     </fragment>
 
     <fragment
@@ -39,12 +36,17 @@
             app:argType="integer" />
         <argument
             android:name="arg_division"
-            app:argType="com.example.android.politicalpreparedness.data.data_objects.dto.Division" />
+            app:argType="com.example.android.politicalpreparedness.data.data_objects.dto.DIVISION"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/electionsFragment"
         android:name="com.example.android.politicalpreparedness.ui.election.ElectionsFragment"
         android:label="fragment_elections"
-        tools:layout="@layout/fragment_election"/>
+        tools:layout="@layout/fragment_election">
+        <action
+            android:id="@+id/action_electionsFragment_to_voterInfoFragment"
+            app:destination="@id/voterInfoFragment" />
+    </fragment>
 
 </navigation>

@@ -6,4 +6,5 @@
     <string name="fragment_launch_image_description">Logo of the app</string>
     <string name="upcoming_elections">Upcoming Elections</string>
     <string name="find_my_representatives">find my representatives</string>
+    <string name="saved_elections">Saved Elections</string>
 </resources>

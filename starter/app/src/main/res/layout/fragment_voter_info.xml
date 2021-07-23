@@ -14,6 +14,7 @@
         <!-- TODO: Add title to toolbar -->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/election_name"
+            app:title=""
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/default_padding"

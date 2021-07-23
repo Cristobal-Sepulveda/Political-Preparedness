@@ -11,9 +11,8 @@ import androidx.lifecycle.Observer
 import com.example.android.politicalpreparedness.base.BaseFragment
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentElectionBinding
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import com.example.android.politicalpreparedness.util.ElectionListAdapter
+import com.example.android.politicalpreparedness.util.NavigationCommand
 import org.koin.android.ext.android.inject
 
 class ElectionsFragment: BaseFragment() {
@@ -36,6 +35,15 @@ class ElectionsFragment: BaseFragment() {
             container,
             false)
         binding.lifecycleOwner = this
+        binding.viewModel = _viewModel
+
+        binding.electionRecyclerView.adapter = ElectionListAdapter(
+            ElectionListAdapter.OnClickListener{
+                _viewModel.navigationCommand.value = NavigationCommand
+                    .To(ElectionsFragmentDirections
+                        .actionElectionsFragmentToVoterInfoFragment(it.id,it.division))
+            }
+        )
 
         _viewModel.reloadFragment.observe(viewLifecycleOwner, Observer{
             if(it){
@@ -48,12 +56,7 @@ class ElectionsFragment: BaseFragment() {
             }
         })
 
-        binding.dbButton.setOnClickListener{
-            GlobalScope.launch {
-                val aux = _viewModel.gettingElectionsFromDB()
-                println(aux)
-            }
-        }
+
 
 
         //TODO: Link elections to voter info

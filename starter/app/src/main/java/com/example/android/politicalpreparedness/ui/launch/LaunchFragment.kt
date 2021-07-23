@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.android.politicalpreparedness.data.data_objects.dto.Division
 import com.example.android.politicalpreparedness.databinding.FragmentLaunchBinding
 
 class LaunchFragment : Fragment() {

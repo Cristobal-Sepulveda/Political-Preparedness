@@ -16,36 +16,31 @@ import kotlinx.coroutines.launch
 //TODO: Construct ViewModel and provide election datasource
 class ElectionsViewModel(val app: Application, val dataSource: AppRepository) : BaseViewModel(app) {
 
+    val database = getDatabase(app)
     /******************************     AUX S        ***********************************/
-    private val database = getDatabase(app)
     private val _reloadFragment = MutableLiveData<Boolean>()
     val reloadFragment : LiveData<Boolean>
         get() = _reloadFragment
 
+
+    val domainElectionsInScreen: MediatorLiveData<List<ELECTION_DOMAIN_OBJECT>> = MediatorLiveData()
     /**********************************************************************************/
 
     init{
         viewModelScope.launch{
-
-            if(dataSource.gettingAndSavingInDB_NextElectionsFromAPIService()) {
-                val electionsInDatabase = dataSource.getElectionsFromDatabase()
-                Log.i("INSERT", "$electionsInDatabase")
-                Log.i("INSERT", "ASDASDASDASDASDASD")
-            }else{
-                _reloadFragment.value = true
+            dataSource.gettingAndSavingInDB_NextElectionsFromAPIService()
+            val electionListFromDatabase = Transformations.map(database.electionDao.getAllElections()){
+                it.asDomainModel()
+            }
+            domainElectionsInScreen.addSource(electionListFromDatabase){
+                domainElectionsInScreen.value = it
             }
         }
     }
+
     fun reloadFragmentDone() {
         _reloadFragment.value = false
     }
-
-    suspend fun gettingElectionsFromDB(): List<ELECTION_DOMAIN_OBJECT>{
-        return dataSource.getElectionsFromDatabase()
-    }
-
-
-
 }
 
 

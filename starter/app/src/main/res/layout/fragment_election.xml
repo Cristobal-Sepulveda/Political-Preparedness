@@ -16,6 +16,7 @@
         android:layout_height="match_parent"
         tools:context="com.example.android.politicalpreparedness.MainActivity">
 
+        <!-- TODO: Add Upcoming Election Recycler and Header -->
         <TextView
             android:id="@+id/upcomingElectionsTitle_textView"
             android:layout_width="wrap_content"
@@ -23,11 +24,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@string/upcoming_elections"
+            android:textSize="@dimen/text_big"
             android:textColor="@color/colorPrimaryDark"
             android:layout_margin="@dimen/space_small"/>
-
-        <!-- TODO: Add Upcoming Election Recycler and Header -->
-        <!--<androidx.recyclerview.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/election_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -35,18 +35,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/upcomingElectionsTitle_textView"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:listData="@{viewModel.electionsInDatabase}">
-        </androidx.recyclerview.widget.RecyclerView>-->
+            app:listData="@{viewModel.domainElectionsInScreen}">
+        </androidx.recyclerview.widget.RecyclerView>
 
         <!-- TODO: Add Saved Election Recycler and Header -->
-        <Button
-            android:id="@+id/db_button"
-            android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/savedElectionsTitle_textView"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
+            app:layout_constraintTop_toBottomOf="@id/election_recyclerView"
+            android:text="@string/saved_elections"
+            android:textSize="@dimen/text_big"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_margin="@dimen/space_small"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

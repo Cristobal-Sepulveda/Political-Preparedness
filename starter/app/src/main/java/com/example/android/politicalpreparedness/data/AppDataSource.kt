@@ -8,7 +8,5 @@ import org.koin.android.ext.android.inject
 
 
 interface AppDataSource {
-    suspend fun gettingAndSavingInDB_NextElectionsFromAPIService():Boolean
-    suspend fun getElectionsFromDatabase(): List<ELECTION_DOMAIN_OBJECT>
-
+    suspend fun gettingAndSavingInDB_NextElectionsFromAPIService()
 }

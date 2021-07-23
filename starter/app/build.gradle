@@ -120,6 +120,9 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.room:room-compiler:$version_room"
 
+    //RecyclerView
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+
 
     /** V */
     // ViewModel and LiveData

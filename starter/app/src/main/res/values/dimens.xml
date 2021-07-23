@@ -4,6 +4,7 @@
     <dimen name="icon_size">60dp</dimen>
     <dimen name="space_big">24dp</dimen>
     <dimen name="space_small">8dp</dimen>
+    <dimen name="text_big">24sp</dimen>
 
     <!-- TODO: Add necessary dimension values -->s
 

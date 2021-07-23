@@ -4,12 +4,13 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.android.politicalpreparedness.data.data_objects.domain_object.ELECTION_DOMAIN_OBJECT
+import com.example.android.politicalpreparedness.data.data_objects.dto.DIVISION
 
 @Entity
 data class ELECTION_DBO(
     val name: String,
     val electionDay: String,
-    val division: String,
+    @Embedded(prefix = "division_")val division: DIVISION,
     @PrimaryKey val id: Int
 )
 

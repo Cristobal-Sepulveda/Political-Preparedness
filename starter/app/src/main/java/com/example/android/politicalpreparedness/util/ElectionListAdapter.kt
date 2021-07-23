@@ -13,13 +13,11 @@ class ElectionListAdapter(private val onClickListener: OnClickListener)
     : ListAdapter<ELECTION_DOMAIN_OBJECT, ElectionListAdapter.ElectionViewHolder>(ElectionDiffCallback) {
 
     //TODO: Create ElectionViewHolder
-    class ElectionViewHolder(val binding: ViewHolderItemElectionBinding) :
+    class ElectionViewHolder(private val binding: ViewHolderItemElectionBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ELECTION_DOMAIN_OBJECT) {
-            binding.electionNameTextView.text = item.name
-            binding.electionDateTextView.text = item.electionDay
-
+            binding.electionItem = item
             //TODO: Show social links ** Hint: Use provided helper methods
             //TODO: Show www link ** Hint: Use provided helper methods
 

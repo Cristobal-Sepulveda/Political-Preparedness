@@ -2,16 +2,12 @@ package com.example.android.politicalpreparedness.util
 
 import com.example.android.politicalpreparedness.data.data_objects.dto.ELECTION_DTO
 import com.example.android.politicalpreparedness.data.data_objects.dto.ELECTION_DTO_Container
-import org.json.JSONObject
 
-fun parseElectionsJsonResult(jsonResult: JSONObject): ELECTION_DTO_Container {
-    val electionObjectsInResponse = jsonResult.getJSONArray("elections")
-    val electionList = ArrayList<ELECTION_DTO>()
-    var i = 0
-    while(i < electionObjectsInResponse.length()){
-        electionList.add(electionObjectsInResponse[i] as ELECTION_DTO)
-        i++
+
+fun parseElectionsToContainer(list: List<ELECTION_DTO>): ELECTION_DTO_Container {
+    val auxList = ArrayList<ELECTION_DTO>()
+    for (element in list) {
+        auxList.add(element)
     }
-    val electionListContainter = ELECTION_DTO_Container(electionList)
-    return electionListContainter
+    return ELECTION_DTO_Container(auxList)
 }
