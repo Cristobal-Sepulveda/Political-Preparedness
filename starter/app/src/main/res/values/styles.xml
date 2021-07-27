@@ -17,4 +17,16 @@
         <item name ="android:layout_marginEnd">@dimen/space_big</item>
         <item name ="android:layout_marginBottom">@dimen/space_big</item>
     </style>
+
+    <style name ="voterInfoTitle_textView">
+        <item name ="android:textSize">@dimen/text_medium</item>
+        <item name ="android:layout_marginTop">@dimen/space_small</item>
+        <item name ="android:layout_marginStart">@dimen/space_small</item>
+    </style>
+
+    <style name ="voterInfoText_textView">
+        <item name ="android:textSize">@dimen/text_small</item>
+        <item name ="android:layout_marginStart">@dimen/space_small</item>
+        <item name= "android:layout_marginTop">@dimen/space_big</item>
+    </style>
 </resources>

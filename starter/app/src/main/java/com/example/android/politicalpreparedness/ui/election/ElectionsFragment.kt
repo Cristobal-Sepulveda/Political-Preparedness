@@ -2,6 +2,7 @@ package com.example.android.politicalpreparedness.ui.election
 
 import android.os.Build
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,29 +38,19 @@ class ElectionsFragment: BaseFragment() {
         binding.lifecycleOwner = this
         binding.viewModel = _viewModel
 
-        binding.electionRecyclerView.adapter = ElectionListAdapter(
-            ElectionListAdapter.OnClickListener{
-                _viewModel.navigationCommand.value = NavigationCommand
-                    .To(ElectionsFragmentDirections
-                        .actionElectionsFragmentToVoterInfoFragment(it.id,it.division))
+        //TODO: Link elections to voter info
+        binding.electionsFromApiRecyclerView.adapter = ElectionListAdapter(
+            ElectionListAdapter.OnClickListener {
+                _viewModel.navigateToVoterInfo(it)
+            }
+        )
+        binding.electionsFromDbRecyclerView.adapter = ElectionListAdapter(
+            ElectionListAdapter.OnClickListener {
+                _viewModel.navigateToVoterInfo(it)
             }
         )
 
-        _viewModel.reloadFragment.observe(viewLifecycleOwner, Observer{
-            if(it){
-                _viewModel.reloadFragmentDone()
-                val ft: FragmentTransaction = requireFragmentManager().beginTransaction()
-                if (Build.VERSION.SDK_INT >= 26) {
-                    ft.setReorderingAllowed(false)
-                }
-                ft.detach(this).attach(this).commit()
-            }
-        })
 
-
-
-
-        //TODO: Link elections to voter info
 
         //TODO: Initiate recycler adapters
 

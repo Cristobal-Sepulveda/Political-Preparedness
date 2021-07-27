@@ -20,7 +20,7 @@ interface ElectionDao {
 
     //TODO: Add select single election query
     @Query("SELECT * FROM ELECTION_DBO where id = :id")
-    suspend fun getElection(id: String): ELECTION_DBO
+    fun getElection(id: Int): LiveData<ELECTION_DBO>
 
     //TODO: Add delete query
     @Query("DELETE FROM ELECTION_DBO")
@@ -28,6 +28,6 @@ interface ElectionDao {
 
     //TODO: Add clear query
     @Query("DELETE FROM ELECTION_DBO WHERE id = :id")
-    suspend fun unfollowElection(id: String)
+    suspend fun unfollowElection(id: Int)
 
 }

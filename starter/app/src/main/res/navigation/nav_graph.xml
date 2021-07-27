@@ -36,8 +36,12 @@
             app:argType="integer" />
         <argument
             android:name="arg_division"
-            app:argType="com.example.android.politicalpreparedness.data.data_objects.dto.DIVISION"
+            app:argType="com.example.android.politicalpreparedness.data.data_objects.domain_object.DIVISION_DOMAIN_OBJECT"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_voterInfoFragment_to_electionsFragment"
+            app:destination="@id/electionsFragment"
+            app:popUpTo="@id/launchFragment" />
     </fragment>
     <fragment
         android:id="@+id/electionsFragment"

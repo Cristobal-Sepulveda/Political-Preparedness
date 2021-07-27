@@ -32,13 +32,11 @@ fun bindRecyclerView2(recyclerView: RecyclerView, data: List<Representative>?) {
 
 @BindingAdapter("linkOnClick")
 fun bindOnTextClickListener(textView: TextView, url: String?) {
-
     textView.setOnClickListener { view: View? ->
         if (url != null && url != "") {
             val context: Context = textView.context
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
-
             context.startActivity(intent)
         }
     }

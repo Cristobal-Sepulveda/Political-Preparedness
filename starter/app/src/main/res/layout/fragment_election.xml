@@ -28,14 +28,14 @@
             android:textColor="@color/colorPrimaryDark"
             android:layout_margin="@dimen/space_small"/>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/election_recyclerView"
+            android:id="@+id/electionsFromApi_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/upcomingElectionsTitle_textView"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:listData="@{viewModel.domainElectionsInScreen}">
+            app:listData="@{viewModel.domainElectionsFromApiInScreen}">
         </androidx.recyclerview.widget.RecyclerView>
 
         <!-- TODO: Add Saved Election Recycler and Header -->
@@ -44,11 +44,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/election_recyclerView"
+            app:layout_constraintTop_toBottomOf="@id/electionsFromApi_recyclerView"
             android:text="@string/saved_elections"
             android:textSize="@dimen/text_big"
             android:textColor="@color/colorPrimaryDark"
             android:layout_margin="@dimen/space_small"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/electionsFromDb_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/savedElectionsTitle_textView"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:listData="@{viewModel.domainElectionsSavedInScreen}">
+        </androidx.recyclerview.widget.RecyclerView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

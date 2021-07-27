@@ -28,19 +28,12 @@ class MyApp : Application() {
             single {
                 ElectionsViewModel(
                     get(),
-                    get() as AppRepository
-                )
-            }
-
-            single{
-                RepresentativeViewModel(
-                    get(),
                     get() as AppDataSource
                 )
             }
 
             single{
-                VoterInfoViewModel(
+                RepresentativeViewModel(
                     get(),
                     get() as AppDataSource
                 )

@@ -1,6 +1,7 @@
 package com.example.android.politicalpreparedness.data.network
 
 import com.example.android.politicalpreparedness.data.data_objects.dto.ElectionResponse
+import com.example.android.politicalpreparedness.data.data_objects.dto.VoterInfoResponse
 import com.example.android.politicalpreparedness.data.network.jsonadapter.ElectionAdapter
 import com.example.android.politicalpreparedness.data.network.jsonadapter.RepresentativeAdapter
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -38,7 +39,11 @@ interface CivicApiService {
 
     //TODO: Add voterinfo API Call
     @GET("voterinfo")
-    suspend fun getVoterInfo()
+    suspend fun getVoterInfo(
+        @Query("key") apiKey: String,
+        @Query("electionId") electionId: Int,
+        @Query("address") address: String
+    ): VoterInfoResponse
 
     //TODO: Add representatives API Call
     @GET("representatives")
