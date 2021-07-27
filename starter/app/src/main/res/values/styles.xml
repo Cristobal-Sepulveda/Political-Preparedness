@@ -11,6 +11,8 @@
 
     <!-- TODO: Add necessary styles -->
     <style name ="defaultStyle_button">
+        <item name ="android:layout_height">wrap_content</item>
+        <item name ="android:layout_width">match_parent</item>
         <item name ="android:textColor">@color/white</item>
         <item name ="android:background">@color/colorPrimary</item>
         <item name ="android:layout_marginStart">@dimen/space_big</item>
@@ -18,15 +20,16 @@
         <item name ="android:layout_marginBottom">@dimen/space_big</item>
     </style>
 
-    <style name ="voterInfoTitle_textView">
+    <style name ="textTitle_textView">
         <item name ="android:textSize">@dimen/text_medium</item>
-        <item name ="android:layout_marginTop">@dimen/space_small</item>
         <item name ="android:layout_marginStart">@dimen/space_small</item>
+        <item name ="android:layout_marginEnd">@dimen/space_small</item>
+        <item name = "android:textStyle">bold</item>
     </style>
 
-    <style name ="voterInfoText_textView">
+    <style name ="textText_textView">
         <item name ="android:textSize">@dimen/text_small</item>
         <item name ="android:layout_marginStart">@dimen/space_small</item>
-        <item name= "android:layout_marginTop">@dimen/space_big</item>
+        <item name ="android:layout_marginEnd">@dimen/space_small</item>
     </style>
 </resources>

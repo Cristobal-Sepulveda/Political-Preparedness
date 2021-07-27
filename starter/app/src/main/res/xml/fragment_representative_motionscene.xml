@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        app:constraintSetStart="@+id/start"
+        app:constraintSetEnd="@id/end" />
 
     <ConstraintSet android:id="@+id/start">
         <Constraint android:id="@+id/search_title" />
@@ -10,7 +15,4 @@
         <Constraint android:id="@id/search_title" />
     </ConstraintSet>
 
-    <Transition
-        app:constraintSetEnd="@id/end"
-        app:constraintSetStart="@+id/start" />
 </MotionScene>

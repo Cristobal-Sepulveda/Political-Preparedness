@@ -40,7 +40,7 @@
 
         <!-- TODO: Add visual styling and content -->
         <TextView
-            style="@style/voterInfoTitle_textView"
+            style="@style/textTitle_textView"
             android:id="@+id/state_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
         <!-- TODO: Add click binding to open web URL -->
         <!-- TODO: Add visual styling and content -->
         <TextView
-            style="@style/voterInfoText_textView"
+            style="@style/textText_textView"
             android:id="@+id/state_locations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,16 +60,18 @@
             app:linkOnClick="@{viewModel.domainELECTIONLinksInScreen.votingLocationFinderUrl}"
             app:layout_constraintTop_toBottomOf="@id/state_header"
             app:layout_constraintStart_toStartOf="@id/election_date"
+            android:layout_marginTop="@dimen/space_small"
             tools:text="Voting Locations"/>
 
         <!-- TODO: Add click binding to open web URL -->
         <!-- TODO: Add visual styling and content -->
         <TextView
-            style="@style/voterInfoText_textView"
+            style="@style/textText_textView"
             android:id="@+id/state_ballot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ballot_information"
+            android:layout_marginTop="@dimen/space_small"
             app:linkOnClick="@{viewModel.domainELECTIONLinksInScreen.ballotInfoUrl}"
             app:layout_constraintTop_toBottomOf="@id/state_locations"
             app:layout_constraintStart_toStartOf="@id/election_date"

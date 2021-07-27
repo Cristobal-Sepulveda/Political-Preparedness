@@ -14,4 +14,12 @@
     <string name="unfollow_election_button">Unfollow Election</string>
     <string name="permission_denied_explanation">Grant location permission in order to get your location.</string>
     <string name="settings">Settings</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="representative_search">Representative Search</string>
+    <string name="use_my_location">Use my Location</string>
+    <string name="my_representatives">My Representatives</string>
+    <string name="address_line_1">Address Line 1</string>
+    <string name="address_line_2">Address Line 2</string>
+    <string name="city">City</string>
+    <string name="zip">Zip</string>
 </resources>

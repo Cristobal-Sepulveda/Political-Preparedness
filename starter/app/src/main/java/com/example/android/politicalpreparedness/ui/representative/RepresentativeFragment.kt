@@ -14,6 +14,7 @@ import android.provider.Settings
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
@@ -57,10 +58,18 @@ class DetailFragment : BaseFragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
+        val states = resources.getStringArray(R.array.states)
+
+        val spinnerAdapter = ArrayAdapter(requireContext(),
+            android.R.layout.simple_spinner_item,
+            states)
+
         //TODO: Establish bindings
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_representative, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = _viewModel
+        binding.state.adapter = spinnerAdapter
+
 
         //TODO: Define and assign Representative adapter
 

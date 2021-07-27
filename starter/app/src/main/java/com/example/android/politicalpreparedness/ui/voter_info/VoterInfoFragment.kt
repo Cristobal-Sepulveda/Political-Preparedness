@@ -64,12 +64,10 @@ class VoterInfoFragment : Fragment() {
             lifecycleScope.launch{
                 if(binding.savingOrDeletingElectionButton.text == "Follow Election"){
                     viewModel.savingElectionInDatabase()
-                    it.findNavController()
-                        .navigate(VoterInfoFragmentDirections.actionVoterInfoFragmentToElectionsFragment())
+                    viewModel.navigateToElectionsFrag()
                 }else{
                     viewModel.deletingElectionInDatabase()
-                    it.findNavController()
-                        .navigate(VoterInfoFragmentDirections.actionVoterInfoFragmentToElectionsFragment())
+                    viewModel.navigateToElectionsFrag()
                 }
             }
         }
