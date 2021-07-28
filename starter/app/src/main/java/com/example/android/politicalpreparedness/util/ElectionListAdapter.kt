@@ -1,6 +1,5 @@
 package com.example.android.politicalpreparedness.util
 
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.politicalpreparedness.data.data_objects.domain_object.ELECTION_DOMAIN_OBJECT
 import com.example.android.politicalpreparedness.databinding.ViewHolderItemElectionBinding
 
-class ElectionListAdapter(private val onClickListener: OnClickListener)
+class ElectionListAdapter(
+    private val onClickListener: OnClickListener)
     : ListAdapter<ELECTION_DOMAIN_OBJECT, ElectionListAdapter.ElectionViewHolder>(ElectionDiffCallback) {
 
     //TODO: Create ElectionViewHolder

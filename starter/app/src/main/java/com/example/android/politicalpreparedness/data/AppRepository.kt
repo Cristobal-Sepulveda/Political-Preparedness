@@ -27,6 +27,5 @@ class AppRepository(private val electionDao: ElectionDao,
             }
         }
     }
-
 }
 

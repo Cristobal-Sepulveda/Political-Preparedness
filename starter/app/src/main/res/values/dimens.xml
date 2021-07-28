@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="default_padding">8dp</dimen>
-    <dimen name="icon_size">60dp</dimen>
+    <dimen name="icon_size">75dp</dimen>
     <dimen name="space_big">24dp</dimen>
+    <dimen name="space_normal">16dp</dimen>
     <dimen name="space_small">8dp</dimen>
     <dimen name="text_big">24sp</dimen>
     <dimen name="text_medium">18sp</dimen>

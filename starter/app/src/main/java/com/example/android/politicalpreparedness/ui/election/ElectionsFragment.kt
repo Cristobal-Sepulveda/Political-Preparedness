@@ -1,19 +1,14 @@
 package com.example.android.politicalpreparedness.ui.election
 
-import android.os.Build
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
 import com.example.android.politicalpreparedness.base.BaseFragment
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentElectionBinding
 import com.example.android.politicalpreparedness.util.ElectionListAdapter
-import com.example.android.politicalpreparedness.util.NavigationCommand
 import org.koin.android.ext.android.inject
 
 class ElectionsFragment: BaseFragment() {
@@ -39,6 +34,9 @@ class ElectionsFragment: BaseFragment() {
         binding.viewModel = _viewModel
 
         //TODO: Link elections to voter info
+        //TODO: Initiate recycler adapters
+        //TODO: Populate recycler adapters
+        //TODO: Refresh adapters when fragment loads
         binding.electionsFromApiRecyclerView.adapter = ElectionListAdapter(
             ElectionListAdapter.OnClickListener {
                 _viewModel.navigateToVoterInfo(it)
@@ -51,14 +49,7 @@ class ElectionsFragment: BaseFragment() {
         )
 
 
-
-        //TODO: Initiate recycler adapters
-
-        //TODO: Populate recycler adapters
-
         return binding.root
     }
-
-    //TODO: Refresh adapters when fragment loads
 
 }

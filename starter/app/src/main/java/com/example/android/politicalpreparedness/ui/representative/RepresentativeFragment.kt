@@ -22,6 +22,7 @@ import com.example.android.politicalpreparedness.base.BaseFragment
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.data.data_objects.domain_object.ADDRESS_DOMAIN_OBJECT
+import com.example.android.politicalpreparedness.util.RepresentativeListAdapter
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
@@ -42,7 +43,11 @@ class DetailFragment : BaseFragment() {
         val GEOFENCE_EXPIRATION_IN_MILLISECONDS: Long = TimeUnit.HOURS.toMillis(1)
     }
 
+    // The entry point to the Fused Location Provider.
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private var lastKnownLocation: Location? = null
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>
+
     private val runningQOrLater = Build.VERSION.SDK_INT >=
             Build.VERSION_CODES.Q
 
@@ -68,19 +73,24 @@ class DetailFragment : BaseFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_representative, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = _viewModel
-        binding.state.adapter = spinnerAdapter
-
+        binding.stateSpinner.adapter = spinnerAdapter
 
         //TODO: Define and assign Representative adapter
-
         //TODO: Populate Representative adapter
+        binding.representativesFromApiRecyclerView.adapter = RepresentativeListAdapter(
+            RepresentativeListAdapter.OnClickListener{
+
+            }
+        )
+
 
         //TODO: Establish button listeners for field and location search
+        binding.useMyLocationButton.setOnClickListener {
+            binding.addressLine1EditText =
+        }
 
         // Construct a FusedLocationProviderClient.
-        fusedLocationProviderClient = LocationServices
-            .getFusedLocationProviderClient(requireActivity())
-        getDeviceLocation()
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         checkPermissionsAndGetDeviceLocation()
         return binding.root
     }
@@ -137,6 +147,19 @@ class DetailFragment : BaseFragment() {
                 locationResult.addOnCompleteListener(requireActivity()) { task ->
                     if (task.isSuccessful) {
                         _viewModel.showSnackBar.value = "Permission available"
+                        lastKnownLocation = task.result
+                        if(lastKnownLocation != null){
+                            Log.i("getDeviceLocation","device location was save correctly")
+                            var address = geoCodeLocation(lastKnownLocation!!)
+
+
+                            //TODO: AQUI DEBO UTILIZAR LA LOCATION lastKnownLocation y enviarla al layout
+                            /////////////////////////////////////
+                        }else{
+                            //TODO: AQUI DEBO UTILIZAR LA LOCATION CAMBIADA lastKnownLocation y enviarla al layout
+                                lastKnownLocation
+                            /////////////////////////////////////
+                        }
                     } else {
                         val ft: FragmentTransaction = requireFragmentManager().beginTransaction()
                         if (Build.VERSION.SDK_INT >= 26) {
@@ -201,5 +224,6 @@ class DetailFragment : BaseFragment() {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(requireView().windowToken, 0)
     }
+
 
 }
