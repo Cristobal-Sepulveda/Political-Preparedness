@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.politicalpreparedness.R
-import com.example.android.politicalpreparedness.data.data_objects.domain_object.Representative
+import com.example.android.politicalpreparedness.data.data_objects.dto.Representative
 import com.example.android.politicalpreparedness.data.data_objects.dto.Channel
 import com.example.android.politicalpreparedness.databinding.ViewHolderItemRepresentativeBinding
 

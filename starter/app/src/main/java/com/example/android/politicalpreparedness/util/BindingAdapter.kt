@@ -14,7 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.data.data_objects.domain_object.ELECTION_DOMAIN_OBJECT
-import com.example.android.politicalpreparedness.data.data_objects.domain_object.Representative
+import com.example.android.politicalpreparedness.data.data_objects.domain_object.REPRESENTATIVE_DOMAIN_OBJECT
+import com.example.android.politicalpreparedness.data.data_objects.dto.Representative
 
 
 @BindingAdapter("listData")

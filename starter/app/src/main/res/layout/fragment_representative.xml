@@ -9,6 +9,10 @@
         <variable
             name="viewModel"
             type="com.example.android.politicalpreparedness.ui.representative.RepresentativeViewModel" />
+
+        <variable
+            name="address"
+            type="com.example.android.politicalpreparedness.data.data_objects.domain_object.ADDRESS_DOMAIN_OBJECT" />
     </data>
 
     <!-- TODO: Add motion scene to hide form on vertical scroll. -->
@@ -36,6 +40,7 @@
             android:layout_height="wrap_content"
             android:autofillHints="Address Line 1"
             android:hint="@string/address_line_1"
+            android:text="@{address.line1}"
             android:inputType="textPostalAddress"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_title" />
@@ -49,6 +54,7 @@
             android:layout_height="0dp"
             android:autofillHints="Address Line 2"
             android:hint="@string/address_line_2"
+            android:text="@{address.line2}"
             android:inputType="textPostalAddress"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/addressLine1_editText" />
@@ -63,6 +69,7 @@
             android:autofillHints="City"
             android:inputType="textPostalAddress"
             android:hint="@string/city"
+            android:text="@{address.city}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/state_spinner"
             app:layout_constraintTop_toBottomOf="@id/addressLine2_editText" />
@@ -91,6 +98,7 @@
             android:layout_height="wrap_content"
             android:autofillHints="Zip"
             android:hint="@string/zip"
+            android:text="@{address.zip}"
             android:inputType="number"
             android:maxLength="5"
             app:layout_constraintStart_toStartOf="parent"

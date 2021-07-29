@@ -86,7 +86,12 @@ class DetailFragment : BaseFragment() {
 
         //TODO: Establish button listeners for field and location search
         binding.useMyLocationButton.setOnClickListener {
-            binding.addressLine1EditText =
+            val aux = geoCodeLocation(lastKnownLocation!!)
+            binding.address = aux
+            val state = aux.state
+            if(state != ""){
+                binding.stateSpinner.setSelection(spinnerAdapter.getPosition(state))
+            }
         }
 
         // Construct a FusedLocationProviderClient.
@@ -139,7 +144,7 @@ class DetailFragment : BaseFragment() {
 
     /** Get the best and most recent location of the device, which may be null in rare
      * cases when a location is not available.*/
-    fun getDeviceLocation() {
+    fun getDeviceLocation(){
         try {
             if (locationPermissionGranted) {
                 Log.i("cristobal", "$locationPermissionGranted")
@@ -150,15 +155,13 @@ class DetailFragment : BaseFragment() {
                         lastKnownLocation = task.result
                         if(lastKnownLocation != null){
                             Log.i("getDeviceLocation","device location was save correctly")
-                            var address = geoCodeLocation(lastKnownLocation!!)
-
-
-                            //TODO: AQUI DEBO UTILIZAR LA LOCATION lastKnownLocation y enviarla al layout
-                            /////////////////////////////////////
+                            Log.i("getDeviceLocation", "$lastKnownLocation")
                         }else{
-                            //TODO: AQUI DEBO UTILIZAR LA LOCATION CAMBIADA lastKnownLocation y enviarla al layout
-                                lastKnownLocation
-                            /////////////////////////////////////
+                            lastKnownLocation = Location(
+                                "fused 37.421908,-122.084108 hAcc=603 et=+3d1h41m54s192ms" +
+                                        " vel=0.0 bear=90.0 vAcc=??? sAcc=??? bAcc=???")
+                            Log.i("getDeviceLocation", "result was null, " +
+                                    "setting lastKnownLocation as :$lastKnownLocation")
                         }
                     } else {
                         val ft: FragmentTransaction = requireFragmentManager().beginTransaction()

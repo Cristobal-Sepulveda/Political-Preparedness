@@ -12,7 +12,7 @@ class AppRepository(private val electionDao: ElectionDao,
                     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO): AppDataSource {
 
     override suspend fun gettingAndSavingInDBNextElections_fromAPIService() {
-        wrapEspressoIdlingResource {
+         wrapEspressoIdlingResource {
             withContext(ioDispatcher) {
                 try {
                     val electionApiResponse = CivicApi.RETROFIT_SERVICE_CIVIC_API.getElections(

@@ -1,7 +1,7 @@
 package com.example.android.politicalpreparedness.data.data_objects.dto
 
 import com.example.android.politicalpreparedness.data.data_objects.domain_object.DIVISION_DOMAIN_OBJECT
-import com.example.android.politicalpreparedness.data.data_objects.domain_object.Representative
+import com.example.android.politicalpreparedness.data.data_objects.domain_object.REPRESENTATIVE_DOMAIN_OBJECT
 import com.squareup.moshi.Json
 
 data class Office (
