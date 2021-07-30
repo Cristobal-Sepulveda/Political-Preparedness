@@ -3,11 +3,9 @@ package com.example.android.politicalpreparedness.util
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +25,6 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<ELECTION_DOMAIN_OBJE
 
 @BindingAdapter("representativeData")
 fun bindRecyclerView2(recyclerView: RecyclerView, data: List<Representative>?) {
-
     val adapter = recyclerView.adapter as RepresentativeListAdapter
     adapter.submitList(data)
 
@@ -45,7 +42,7 @@ fun bindOnTextClickListener(textView: TextView, url: String?) {
     }
 }
 
-@BindingAdapter("app:loadImage")
+/*@BindingAdapter("app:loadImage")
 fun loadImage(view: ImageView, url: String?) {
     val uri = (url ?: "").toUri().buildUpon().scheme("https").build()
 
@@ -54,7 +51,7 @@ fun loadImage(view: ImageView, url: String?) {
         .error(R.drawable.ic_profile)
         .circleCrop()
         .into(view)
-}
+}*/
 
 @BindingAdapter("profileImage")
 fun fetchImage(view: ImageView, src: String?) {
@@ -73,6 +70,20 @@ fun Spinner.setNewValue(value: String?) {
     }
     if (position >= 0) {
         setSelection(position)
+    }
+}
+
+@BindingAdapter("isVisible")
+fun isButtonVisible(button : Button, data : Boolean){
+    if(data){
+        button.isEnabled = true
+        Log.i("AMAYA", "TROLOLOLOLO")
+        button.setBackgroundResource(R.color.colorPrimaryDark)
+    }else{
+        button.isEnabled = false
+        button.setBackgroundResource(R.color.white)
+        Log.i("AMAYA", "BASH PERERE")
+
     }
 }
 

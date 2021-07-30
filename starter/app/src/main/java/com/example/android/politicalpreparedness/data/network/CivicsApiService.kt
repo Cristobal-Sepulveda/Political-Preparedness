@@ -1,6 +1,7 @@
 package com.example.android.politicalpreparedness.data.network
 
 import com.example.android.politicalpreparedness.data.data_objects.dto.ElectionResponse
+import com.example.android.politicalpreparedness.data.data_objects.dto.RepresentativeResponse
 import com.example.android.politicalpreparedness.data.data_objects.dto.VoterInfoResponse
 import com.example.android.politicalpreparedness.data.network.jsonadapter.ElectionAdapter
 import com.example.android.politicalpreparedness.data.network.jsonadapter.RepresentativeAdapter
@@ -50,7 +51,7 @@ interface CivicApiService {
     suspend fun getRepresentatives(
         @Query("key") apiKey: String,
         @Query("address") address: String,
-    )
+    ): RepresentativeResponse
 }
 
 object CivicApi {

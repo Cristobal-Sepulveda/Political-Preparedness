@@ -111,7 +111,9 @@
             android:id="@+id/findMyRepresentatives_button"
             android:text="@string/find_my_representatives"
             app:layout_constraintTop_toBottomOf="@id/zip_editText"
-            android:layout_marginTop="@dimen/space_small"/>
+            android:layout_marginTop="@dimen/space_small"
+            app:isVisible="@{viewModel.buttonAvailable}"
+            android:onClick="@{()-> viewModel.getRepresentativesFromAPI(address)}"/>
 
         <!-- TODO: Add visual styling and content -->
         <Button
@@ -119,7 +121,7 @@
             android:id="@+id/useMyLocation_button"
             android:text="@string/use_my_location"
             app:layout_constraintTop_toBottomOf="@id/findMyRepresentatives_button"
-            android:layout_marginTop="@dimen/space_small"/>
+            android:layout_marginTop="@dimen/space_small" />
 
         <!-- TODO: Add visual styling and content -->
         <TextView
@@ -140,7 +142,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/representativeTitle_textView"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:representativeData="@{viewModel.domainRepresentativesInScreen}">
         </androidx.recyclerview.widget.RecyclerView>
 
         <!-- TODO: Add visual styling and content -->

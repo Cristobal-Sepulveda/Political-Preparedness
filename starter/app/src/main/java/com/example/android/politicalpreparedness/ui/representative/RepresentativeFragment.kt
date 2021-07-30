@@ -11,13 +11,18 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
+import android.widget.Button
 import androidx.core.app.ActivityCompat
+import androidx.core.graphics.blue
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import com.example.android.politicalpreparedness.base.BaseFragment
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
@@ -42,6 +47,10 @@ class DetailFragment : BaseFragment() {
         var locationPermissionGranted = false
         val GEOFENCE_EXPIRATION_IN_MILLISECONDS: Long = TimeUnit.HOURS.toMillis(1)
     }
+    var editLine1 = ""
+    var editLine2 = ""
+    var editCity = ""
+    var editZip = ""
 
     // The entry point to the Fused Location Provider.
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -74,6 +83,7 @@ class DetailFragment : BaseFragment() {
         binding.lifecycleOwner = this
         binding.viewModel = _viewModel
         binding.stateSpinner.adapter = spinnerAdapter
+        binding.address = ADDRESS_DOMAIN_OBJECT("", "", "", "", "")
 
         //TODO: Define and assign Representative adapter
         //TODO: Populate Representative adapter
@@ -83,10 +93,9 @@ class DetailFragment : BaseFragment() {
             }
         )
 
-
         //TODO: Establish button listeners for field and location search
         binding.useMyLocationButton.setOnClickListener {
-            val aux = geoCodeLocation(lastKnownLocation!!)
+            val aux = _viewModel.geoCodeLocation(lastKnownLocation!!)
             binding.address = aux
             val state = aux.state
             if(state != ""){
@@ -97,6 +106,97 @@ class DetailFragment : BaseFragment() {
         // Construct a FusedLocationProviderClient.
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         checkPermissionsAndGetDeviceLocation()
+
+        /**
+         * ALL OF THIS IS FOR WATCH THE EDIT TEXT's CHANGES AND CHECK IF THE FIND MY REPRESENTATIVE
+         * BUTTON SHOULD BE ENABLED or not
+         * */
+        binding.addressLine1EditText.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                return
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                return
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                editLine1 = s.toString()
+                _viewModel.isRepresentativeButtonEnabled(
+                    editLine1,
+                    editLine2,
+                    editCity,
+                    editZip
+                )
+            }
+        })
+
+        binding.addressLine2EditText.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                return
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                return
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                editLine2 = s.toString()
+                _viewModel.isRepresentativeButtonEnabled(
+                    editLine1,
+                    editLine2,
+                    editCity,
+                    editZip
+                )
+            }
+        })
+
+        binding.cityEditText.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                return
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                return
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                editCity = s.toString()
+                _viewModel.isRepresentativeButtonEnabled(
+                    editLine1,
+                    editLine2,
+                    editCity,
+                    editZip
+                )
+            }
+        })
+
+        binding.zipEditText.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                return
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                return
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                editZip = s.toString()
+                _viewModel.isRepresentativeButtonEnabled(
+                    editLine1,
+                    editLine2,
+                    editCity,
+                    editZip
+                )
+            }
+        })
+        /**
+         * ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+         * ALL OF THIS ABOVE FOR WATCH THE EDIT TEXT's CHANGES AND CHECK IF THE FIND MY REPRESENTATIVE
+         * BUTTON SHOULD BE ENABLED or not
+         * ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+         * */
+
         return binding.root
     }
 
@@ -195,7 +295,6 @@ class DetailFragment : BaseFragment() {
         )
     }
 
-
     @TargetApi(29)
     fun foregroundAndBackgroundLocationPermissionApproved(): Boolean {
         val foregroundLocationApproved = (
@@ -212,15 +311,6 @@ class DetailFragment : BaseFragment() {
                 true
             }
         return foregroundLocationApproved && backgroundPermissionApproved
-    }
-
-    private fun geoCodeLocation(location: Location): ADDRESS_DOMAIN_OBJECT {
-        val geocoder = Geocoder(context, Locale.getDefault())
-        return geocoder.getFromLocation(location.latitude, location.longitude, 1)
-                .map { address ->
-                    ADDRESS_DOMAIN_OBJECT(address.thoroughfare, address.subThoroughfare, address.locality, address.adminArea, address.postalCode)
-                }
-                .first()
     }
 
     private fun hideKeyboard() {
