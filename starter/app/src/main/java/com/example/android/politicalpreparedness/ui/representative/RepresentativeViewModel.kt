@@ -66,6 +66,7 @@ class RepresentativeViewModel(val app: Application, val dataSource: AppDataSourc
                         "AIzaSyBNGDAG_qIAaCtZGcDftVXgI75-CwcWg64",
                     addressDomainObject.toFormattedString())
                 val representatives = representativesApiResponse.representatives
+                Log.i("TAG", "$representatives")
                 _representatives.value = representatives
                 domainRepresentativesInScreen.addSource(_representatives){
                     domainRepresentativesInScreen.value = it

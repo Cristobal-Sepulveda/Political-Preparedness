@@ -77,13 +77,10 @@ fun Spinner.setNewValue(value: String?) {
 fun isButtonVisible(button : Button, data : Boolean){
     if(data){
         button.isEnabled = true
-        Log.i("AMAYA", "TROLOLOLOLO")
         button.setBackgroundResource(R.color.colorPrimaryDark)
     }else{
         button.isEnabled = false
         button.setBackgroundResource(R.color.white)
-        Log.i("AMAYA", "BASH PERERE")
-
     }
 }
 

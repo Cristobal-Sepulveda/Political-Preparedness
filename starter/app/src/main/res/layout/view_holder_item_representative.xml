@@ -7,8 +7,8 @@
 
     <data>
         <variable
-            name="electionDB"
-            type="com.example.android.politicalpreparedness.data.database.ElectionDatabaseKt" />
+            name="representative"
+            type="com.example.android.politicalpreparedness.data.data_objects.dto.Representative" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,42 +20,39 @@
             android:id="@+id/representativePhoto_imageView"
             android:layout_width="@dimen/icon_size"
             android:layout_height="@dimen/icon_size"
-            android:layout_marginStart="@dimen/space_big"
+            android:layout_marginStart="@dimen/space_normal"
             android:layout_marginTop="@dimen/space_small"
             android:layout_marginBottom="@dimen/space_small"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src ="@drawable/ic_profile"/>
+            tools:src="@drawable/ic_profile" />
 
         <TextView
             android:id="@+id/representativeCharge_textView"
-            style="@style/textTitle_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_medium"
+            android:layout_marginStart="@dimen/space_small"
             app:layout_constraintStart_toEndOf="@+id/representativePhoto_imageView"
             app:layout_constraintTop_toTopOf="@+id/representativePhoto_imageView"
-            tools:text="President of the United States" />
+            tools:text="Vice President of the United States" />
 
         <TextView
             android:id="@+id/representativeName_textView"
-            style="@style/textText_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_small"
-            app:layout_constraintStart_toEndOf="@+id/representativePhoto_imageView"
+            app:layout_constraintStart_toStartOf="@+id/representativeCharge_textView"
             app:layout_constraintTop_toBottomOf="@id/representativeCharge_textView"
-            tools:text="Cristóbal Sepúlveda Silva" />
+            tools:text="Cristóbal Sepú" />
 
         <TextView
             android:id="@+id/representativeParty_textView"
-            style="@style/textText_textView"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/representativePhoto_imageView"
-            app:layout_constraintStart_toEndOf="@+id/representativePhoto_imageView"
+            app:layout_constraintStart_toStartOf="@+id/representativeCharge_textView"
             app:layout_constraintTop_toBottomOf="@id/representativeName_textView"
             tools:text="Chilean Party" />
 
@@ -63,28 +60,39 @@
             android:id="@+id/representativeWWW_imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:src="@drawable/ic_www"
-            app:layout_constraintBottom_toBottomOf="@+id/representativeParty_textView"
-            app:layout_constraintStart_toEndOf="@id/representativeName_textView"
-            app:layout_constraintTop_toTopOf="@id/representativeName_textView" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/representativeFacebook_imageView"
+            app:layout_constraintStart_toEndOf="@id/representativeParty_textView"
+            app:layout_constraintTop_toBottomOf="@id/representativeName_textView"/>
 
         <ImageView
             android:id="@+id/representativeFacebook_imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
             android:src="@drawable/ic_facebook"
-            app:layout_constraintBottom_toBottomOf="@+id/representativeParty_textView"
-            app:layout_constraintStart_toEndOf="@id/representativeWWW_imageView"
-            app:layout_constraintTop_toTopOf="@id/representativeName_textView" />
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/representativeName_textView"
+            app:layout_constraintEnd_toStartOf="@id/representativeTwitter_imageView"
+            app:layout_constraintStart_toEndOf="@+id/representativeWWW_imageView" />
 
         <ImageView
             android:id="@+id/representativeTwitter_imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="@dimen/space_normal"
+            android:layout_marginBottom="8dp"
             android:src="@drawable/ic_twitter"
-            app:layout_constraintBottom_toBottomOf="@+id/representativeParty_textView"
-            app:layout_constraintStart_toEndOf="@id/representativeFacebook_imageView"
-            app:layout_constraintTop_toTopOf="@id/representativeName_textView" />
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/representativeFacebook_imageView"
+            app:layout_constraintTop_toTopOf="@+id/representativeParty_textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

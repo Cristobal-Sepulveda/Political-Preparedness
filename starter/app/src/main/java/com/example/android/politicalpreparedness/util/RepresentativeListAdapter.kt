@@ -25,8 +25,12 @@ class RepresentativeListAdapter(
         fun bind(item: Representative) {
             binding.representativeNameTextView.text = item.official.name
             binding.representativePhotoImageView.setImageResource(R.drawable.ic_profile)
-
+            binding.representativeChargeTextView.text = item.office.name
+            binding.representativePartyTextView.text = item.official.party
+            item.official.channels?.let{showSocialLinks(it)}
+            item.official.urls?.let{showWWWLinks(it)}
             //TODO: Show social links ** Hint: Use provided helper methods
+
             //TODO: Show www link ** Hint: Use provided helper methods
 
             binding.executePendingBindings()

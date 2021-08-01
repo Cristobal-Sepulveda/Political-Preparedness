@@ -95,6 +95,7 @@ class DetailFragment : BaseFragment() {
 
         //TODO: Establish button listeners for field and location search
         binding.useMyLocationButton.setOnClickListener {
+            getDeviceLocation()
             val aux = _viewModel.geoCodeLocation(lastKnownLocation!!)
             binding.address = aux
             val state = aux.state
@@ -105,7 +106,7 @@ class DetailFragment : BaseFragment() {
 
         // Construct a FusedLocationProviderClient.
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        checkPermissionsAndGetDeviceLocation()
+
 
         /**
          * ALL OF THIS IS FOR WATCH THE EDIT TEXT's CHANGES AND CHECK IF THE FIND MY REPRESENTATIVE
@@ -196,6 +197,7 @@ class DetailFragment : BaseFragment() {
          * BUTTON SHOULD BE ENABLED or not
          * ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
          * */
+        checkPermissionsAndGetDeviceLocation()
 
         return binding.root
     }
@@ -203,13 +205,15 @@ class DetailFragment : BaseFragment() {
     private fun checkPermissionsAndGetDeviceLocation() {
         if (foregroundAndBackgroundLocationPermissionApproved()) {
             locationPermissionGranted = true
+            Log.i("amaya", "permissionsApproved")
             getDeviceLocation()
         } else {
+            Log.i("amaya", "permissions Non Approved")
             requestForegroundAndBackgroundLocationPermissions()
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int,
+/*    override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>,
                                             grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -218,29 +222,28 @@ class DetailFragment : BaseFragment() {
             grantResults[LOCATION_PERMISSION_INDEX] == PackageManager.PERMISSION_DENIED ||
             (requestCode == REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE &&
                     grantResults[BACKGROUND_LOCATION_PERMISSION_INDEX] ==
-                    PackageManager.PERMISSION_DENIED)) {
+                    PackageManager.PERMISSION_DENIED)
+        ) {
             Snackbar.make(
                 binding.root,
                 R.string.permission_denied_explanation,
-                Snackbar.LENGTH_LONG
+                Snackbar.LENGTH_INDEFINITE
             )
                 .setAction(R.string.settings) {
                     startActivity(Intent().apply {
                         action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                        data = Uri.fromParts("package",
+                        data = Uri.fromParts(
+                            "package",
                             "com.example.android.politicalpreparedness",
-                            null)
+                            null
+                        )
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     })
                 }.show()
-        }else{
-            val ft: FragmentTransaction = requireFragmentManager().beginTransaction()
-            if (Build.VERSION.SDK_INT >= 26) {
-                ft.setReorderingAllowed(false)
-            }
-            ft.detach(this).attach(this).commit()
+        } else {
+
         }
-    }
+    }*/
 
     /** Get the best and most recent location of the device, which may be null in rare
      * cases when a location is not available.*/
@@ -253,15 +256,18 @@ class DetailFragment : BaseFragment() {
                     if (task.isSuccessful) {
                         _viewModel.showSnackBar.value = "Permission available"
                         lastKnownLocation = task.result
-                        if(lastKnownLocation != null){
-                            Log.i("getDeviceLocation","device location was save correctly")
+                        if (lastKnownLocation != null) {
+                            Log.i("getDeviceLocation", "device location was save correctly")
                             Log.i("getDeviceLocation", "$lastKnownLocation")
-                        }else{
+                        } else {
                             lastKnownLocation = Location(
                                 "fused 37.421908,-122.084108 hAcc=603 et=+3d1h41m54s192ms" +
-                                        " vel=0.0 bear=90.0 vAcc=??? sAcc=??? bAcc=???")
-                            Log.i("getDeviceLocation", "result was null, " +
-                                    "setting lastKnownLocation as :$lastKnownLocation")
+                                        " vel=0.0 bear=90.0 vAcc=??? sAcc=??? bAcc=???"
+                            )
+                            Log.i(
+                                "getDeviceLocation", "result was null, " +
+                                        "setting lastKnownLocation as :$lastKnownLocation"
+                            )
                         }
                     } else {
                         val ft: FragmentTransaction = requireFragmentManager().beginTransaction()
