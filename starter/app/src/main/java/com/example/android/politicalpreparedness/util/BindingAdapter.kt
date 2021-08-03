@@ -3,7 +3,6 @@ package com.example.android.politicalpreparedness.util
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.core.net.toUri
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.android.politicalpreparedness.R
 import com.example.android.politicalpreparedness.data.data_objects.domain_object.ELECTION_DOMAIN_OBJECT
-import com.example.android.politicalpreparedness.data.data_objects.domain_object.REPRESENTATIVE_DOMAIN_OBJECT
 import com.example.android.politicalpreparedness.data.data_objects.dto.Representative
 
 
@@ -42,23 +40,16 @@ fun bindOnTextClickListener(textView: TextView, url: String?) {
     }
 }
 
-/*@BindingAdapter("app:loadImage")
-fun loadImage(view: ImageView, url: String?) {
-    val uri = (url ?: "").toUri().buildUpon().scheme("https").build()
-
-    Glide.with(view).load(uri)
-        .placeholder(R.drawable.ic_profile)
-        .error(R.drawable.ic_profile)
-        .circleCrop()
-        .into(view)
-}*/
-
 @BindingAdapter("profileImage")
 fun fetchImage(view: ImageView, src: String?) {
-    src?.let {
-        val uri = src.toUri().buildUpon().scheme("https").build()
-        //TODO: Add Glide call to load image and circle crop - user ic_profile as a placeholder and for errors.
-    }
+    //TODO: Add Glide call to load image and circle crop - user ic_profile as a placeholder and for errors.
+    val uri = (src ?: "").toUri().buildUpon().scheme("https").build()
+    Glide.with(view)
+        .load(uri)
+        .placeholder(R.drawable.ic_profile)
+        .error(R.drawable.ic_broken_image)
+        .circleCrop()
+        .into(view)
 }
 
 @BindingAdapter("stateValue")

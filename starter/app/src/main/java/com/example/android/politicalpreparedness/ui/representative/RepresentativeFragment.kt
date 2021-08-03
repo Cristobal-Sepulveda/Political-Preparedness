@@ -47,6 +47,7 @@ class DetailFragment : BaseFragment() {
         var locationPermissionGranted = false
         val GEOFENCE_EXPIRATION_IN_MILLISECONDS: Long = TimeUnit.HOURS.toMillis(1)
     }
+
     var editLine1 = ""
     var editLine2 = ""
     var editCity = ""
@@ -68,18 +69,23 @@ class DetailFragment : BaseFragment() {
     //TODO: Establish bindings
     private lateinit var binding: FragmentRepresentativeBinding
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
 
         val states = resources.getStringArray(R.array.states)
 
-        val spinnerAdapter = ArrayAdapter(requireContext(),
+        val spinnerAdapter = ArrayAdapter(
+            requireContext(),
             android.R.layout.simple_spinner_item,
-            states)
+            states
+        )
 
         //TODO: Establish bindings
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_representative, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_representative, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = _viewModel
         binding.stateSpinner.adapter = spinnerAdapter
@@ -88,7 +94,7 @@ class DetailFragment : BaseFragment() {
         //TODO: Define and assign Representative adapter
         //TODO: Populate Representative adapter
         binding.representativesFromApiRecyclerView.adapter = RepresentativeListAdapter(
-            RepresentativeListAdapter.OnClickListener{
+            RepresentativeListAdapter.OnClickListener {
 
             }
         )
@@ -96,23 +102,28 @@ class DetailFragment : BaseFragment() {
         //TODO: Establish button listeners for field and location search
         binding.useMyLocationButton.setOnClickListener {
             getDeviceLocation()
-            val aux = _viewModel.geoCodeLocation(lastKnownLocation!!)
-            binding.address = aux
-            val state = aux.state
-            if(state != ""){
-                binding.stateSpinner.setSelection(spinnerAdapter.getPosition(state))
+            if(lastKnownLocation != null){
+                val aux = _viewModel.geoCodeLocation(lastKnownLocation!!)
+                binding.address = aux
+                val state = aux.state
+                if (state != "") {
+                    binding.stateSpinner.setSelection(spinnerAdapter.getPosition(state))
+                }
+            }else{
+                _viewModel.showSnackBar.value = "You must accept the permissions if you want to use this button"
             }
         }
 
         // Construct a FusedLocationProviderClient.
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
 
 
         /**
          * ALL OF THIS IS FOR WATCH THE EDIT TEXT's CHANGES AND CHECK IF THE FIND MY REPRESENTATIVE
          * BUTTON SHOULD BE ENABLED or not
          * */
-        binding.addressLine1EditText.addTextChangedListener(object: TextWatcher{
+        binding.addressLine1EditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 return
             }
@@ -132,7 +143,7 @@ class DetailFragment : BaseFragment() {
             }
         })
 
-        binding.addressLine2EditText.addTextChangedListener(object: TextWatcher{
+        binding.addressLine2EditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 return
             }
@@ -152,7 +163,7 @@ class DetailFragment : BaseFragment() {
             }
         })
 
-        binding.cityEditText.addTextChangedListener(object: TextWatcher{
+        binding.cityEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 return
             }
@@ -172,7 +183,7 @@ class DetailFragment : BaseFragment() {
             }
         })
 
-        binding.zipEditText.addTextChangedListener(object: TextWatcher{
+        binding.zipEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 return
             }
@@ -205,17 +216,16 @@ class DetailFragment : BaseFragment() {
     private fun checkPermissionsAndGetDeviceLocation() {
         if (foregroundAndBackgroundLocationPermissionApproved()) {
             locationPermissionGranted = true
-            Log.i("amaya", "permissionsApproved")
             getDeviceLocation()
         } else {
-            Log.i("amaya", "permissions Non Approved")
             requestForegroundAndBackgroundLocationPermissions()
         }
     }
 
-/*    override fun onRequestPermissionsResult(requestCode: Int,
-                                            permissions: Array<String>,
-                                            grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (
             grantResults.isEmpty() ||
@@ -227,86 +237,88 @@ class DetailFragment : BaseFragment() {
             Snackbar.make(
                 binding.root,
                 R.string.permission_denied_explanation,
-                Snackbar.LENGTH_INDEFINITE
-            )
-                .setAction(R.string.settings) {
-                    startActivity(Intent().apply {
-                        action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                        data = Uri.fromParts(
-                            "package",
-                            "com.example.android.politicalpreparedness",
-                            null
-                        )
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    })
-                }.show()
-        } else {
-
+                Snackbar.LENGTH_LONG
+            ).setAction(R.string.settings) {
+                startActivityForResult(Intent().apply {
+                    action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                    data = Uri.fromParts(
+                        "package",
+                        "com.example.android.politicalpreparedness",
+                        null
+                    )
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                }, 1001)
+            }.show()
+        }else{
+            _viewModel.showSnackBar.value = "Permission available"
+            checkPermissionsAndGetDeviceLocation()
         }
-    }*/
+    }
 
     /** Get the best and most recent location of the device, which may be null in rare
      * cases when a location is not available.*/
-    fun getDeviceLocation(){
-        try {
-            if (locationPermissionGranted) {
-                Log.i("cristobal", "$locationPermissionGranted")
-                val locationResult = fusedLocationProviderClient.lastLocation
-                locationResult.addOnCompleteListener(requireActivity()) { task ->
-                    if (task.isSuccessful) {
-                        _viewModel.showSnackBar.value = "Permission available"
-                        lastKnownLocation = task.result
-                        if (lastKnownLocation != null) {
-                            Log.i("getDeviceLocation", "device location was save correctly")
-                            Log.i("getDeviceLocation", "$lastKnownLocation")
+    fun getDeviceLocation() {
+            try {
+                if (locationPermissionGranted) {
+                    Log.i("cristobal", "$locationPermissionGranted")
+                    val locationResult = fusedLocationProviderClient.lastLocation
+                    locationResult.addOnCompleteListener(requireActivity()) { task ->
+                        if (task.isSuccessful) {
+                            lastKnownLocation = task.result
+                            if (lastKnownLocation != null) {
+                                Log.i("getDeviceLocation", "device location was save correctly")
+                                Log.i("getDeviceLocation", "$lastKnownLocation")
+                            } else {
+                                lastKnownLocation = Location(
+                                    "fused 37.421908,-122.084108 hAcc=603 et=+3d1h41m54s192ms" +
+                                            " vel=0.0 bear=90.0 vAcc=??? sAcc=??? bAcc=???"
+                                )
+                                Log.i(
+                                    "getDeviceLocation", "result was null, " +
+                                            "setting lastKnownLocation as :$lastKnownLocation"
+                                )
+                            }
                         } else {
-                            lastKnownLocation = Location(
-                                "fused 37.421908,-122.084108 hAcc=603 et=+3d1h41m54s192ms" +
-                                        " vel=0.0 bear=90.0 vAcc=??? sAcc=??? bAcc=???"
-                            )
-                            Log.i(
-                                "getDeviceLocation", "result was null, " +
-                                        "setting lastKnownLocation as :$lastKnownLocation"
-                            )
+                            val ft: FragmentTransaction =
+                                requireFragmentManager().beginTransaction()
+                            if (Build.VERSION.SDK_INT >= 26) {
+                                ft.setReorderingAllowed(false)
+                            }
+                            ft.detach(this).attach(this).commit()
                         }
-                    } else {
-                        val ft: FragmentTransaction = requireFragmentManager().beginTransaction()
-                        if (Build.VERSION.SDK_INT >= 26) {
-                            ft.setReorderingAllowed(false)
-                        }
-                        ft.detach(this).attach(this).commit()
                     }
                 }
+            } catch (e: SecurityException) {
+                Log.e("Exception: %s", e.message, e)
             }
-        } catch (e: SecurityException) {
-            Log.e("Exception: %s", e.message, e)
         }
-    }
 
     @TargetApi(29)
     private fun requestForegroundAndBackgroundLocationPermissions() {
         if (foregroundAndBackgroundLocationPermissionApproved())
             return
         var permissionsArray = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION)
-        val resultCode = when {
-            runningQOrLater -> {
-                permissionsArray += Manifest.permission.ACCESS_BACKGROUND_LOCATION
-                REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE
+            val resultCode = when {
+                runningQOrLater -> {
+                    permissionsArray += Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                    REQUEST_FOREGROUND_AND_BACKGROUND_PERMISSION_RESULT_CODE
+                }
+                else -> REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
             }
-            else -> REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
+            requestPermissions(
+                permissionsArray,
+                resultCode
+            )
         }
-        requestPermissions(
-            permissionsArray,
-            resultCode
-        )
-    }
 
     @TargetApi(29)
     fun foregroundAndBackgroundLocationPermissionApproved(): Boolean {
         val foregroundLocationApproved = (
                 PackageManager.PERMISSION_GRANTED ==
-                        ActivityCompat.checkSelfPermission(requireActivity(),
-                            Manifest.permission.ACCESS_FINE_LOCATION))
+                        ActivityCompat.checkSelfPermission(
+                            requireActivity(),
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ))
         val backgroundPermissionApproved =
             if (runningQOrLater) {
                 PackageManager.PERMISSION_GRANTED ==
@@ -323,6 +335,4 @@ class DetailFragment : BaseFragment() {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(requireView().windowToken, 0)
     }
-
-
 }

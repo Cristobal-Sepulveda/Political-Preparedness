@@ -5,7 +5,7 @@ data class ADDRESS_DOMAIN_OBJECT (
         val line2: String? = null,
         val city: String,
         val state: String,
-        val zip: String
+        val zip: String? = null
 ) {
     fun toFormattedString(): String {
         var output = line1.plus("\n")

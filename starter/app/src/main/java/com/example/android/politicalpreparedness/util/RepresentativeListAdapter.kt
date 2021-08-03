@@ -23,16 +23,15 @@ class RepresentativeListAdapter(
         : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Representative) {
+            binding.representative =item
             binding.representativeNameTextView.text = item.official.name
             binding.representativePhotoImageView.setImageResource(R.drawable.ic_profile)
             binding.representativeChargeTextView.text = item.office.name
             binding.representativePartyTextView.text = item.official.party
-            item.official.channels?.let{showSocialLinks(it)}
-            item.official.urls?.let{showWWWLinks(it)}
             //TODO: Show social links ** Hint: Use provided helper methods
-
+            item.official.channels?.let{showSocialLinks(it)}
             //TODO: Show www link ** Hint: Use provided helper methods
-
+            item.official.urls?.let{showWWWLinks(it)}
             binding.executePendingBindings()
         }
         private fun showSocialLinks(channels: List<Channel>) {
@@ -70,8 +69,6 @@ class RepresentativeListAdapter(
             itemView.context.startActivity(intent)
         }
     }
-
-
 
     /**
      * Callback for calculating the diff between two non-null items in a list.

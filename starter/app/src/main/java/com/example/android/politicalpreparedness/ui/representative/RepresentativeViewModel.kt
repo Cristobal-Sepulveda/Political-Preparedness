@@ -39,6 +39,17 @@ class RepresentativeViewModel(val app: Application, val dataSource: AppDataSourc
     //TODO: Create function to get address from individual fields
     fun geoCodeLocation(location: Location): ADDRESS_DOMAIN_OBJECT {
         val geocoder = Geocoder(app, Locale.getDefault())
+        val aux = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+        if(aux.first().countryCode != "US"){
+            location.latitude = 37.4218465
+            location.longitude = -122.0841244
+            showSnackBar.value = "Your location is outside USA, we provide a default location for you"
+            return geocoder.getFromLocation(location.latitude, location.longitude, 1)
+                .map { address ->
+                    ADDRESS_DOMAIN_OBJECT(address.thoroughfare, address.subThoroughfare, address.locality, address.adminArea, address.postalCode)
+                }
+                .first()
+        }
         return geocoder.getFromLocation(location.latitude, location.longitude, 1)
             .map { address ->
                 ADDRESS_DOMAIN_OBJECT(address.thoroughfare, address.subThoroughfare, address.locality, address.adminArea, address.postalCode)

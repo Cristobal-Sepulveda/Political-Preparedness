@@ -2,17 +2,42 @@
 <MotionScene
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <!-- A transition describes an animation via start and end state -->
     <Transition
         app:constraintSetStart="@+id/start"
-        app:constraintSetEnd="@id/end" />
+        app:constraintSetEnd="@id/end">
+        <!-- MotionLayout will track swipes relative to this view -->
+        <OnSwipe
+            app:dragDirection="dragUp"
+            app:moveWhenScrollAtTop="true"
+            app:onTouchUp="stop"
+            app:touchAnchorId="@id/representativesFromApi_recyclerView" />
+    </Transition>
+
 
     <ConstraintSet android:id="@+id/start">
-        <Constraint android:id="@+id/search_title" />
+        <Constraint
+            android:id="@+id/representativesFromApi_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/representativeTitle_textView"/>
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
-        <Constraint android:id="@id/search_title" />
+        <Constraint
+            android:id="@id/representativesFromApi_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/representativeTitle_textView"
+            />
+        <Constraint
+            android:id="@+id/menu_constraintLayout"
+            android:visibility="gone"
+            />
     </ConstraintSet>
 
 </MotionScene>
